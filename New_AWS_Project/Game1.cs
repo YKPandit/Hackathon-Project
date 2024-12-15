@@ -45,6 +45,8 @@ public class Game1 : Game
         base.Update(gameTime);
 		player.Update(gameTime);
     }
+    
+    
 
     protected override void Draw(GameTime gameTime)
     {
