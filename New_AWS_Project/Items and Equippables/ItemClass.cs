@@ -9,21 +9,25 @@ using Microsoft.Xna.Framework.Input;
 
 public class Item
 {
+    private Game1 item;
+    private Texture2D ItemSprite { get; set; } // Sprite for item
+    private Vector2 ItemPosition { get; set; } // Position of item on screen
     public string Name { get; set; }
-    public int Weight { get; set; }
+    public string Type { get; set; }
     public string Rarity { get; set; }
     public bool Attacking { get; set; }
     public bool Using { get; set; }
-    public Texture2D ItemSprite { get; set; } // Sprite for item
-    public Item(string name, string rarity)
+
+    public Item(string name, string type, string rarity)
     {
         Name = name;
+        Type = type;
         Rarity = rarity;
         Attacking = false;
         Using = false;
     }
 
-    public Rectangle ItemPositionRectangle // Create hitbox for item
+    public virtual Rectangle ItemPositionRectangle // Create hitbox for item
     {
         get
         {
@@ -44,6 +48,7 @@ public class Item
 
     public virtual void use(Game1 entity){
         // Default use method for items is to do nothing
+        Using = true;
     }
 }
 

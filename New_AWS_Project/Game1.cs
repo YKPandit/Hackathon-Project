@@ -10,6 +10,7 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 	private Player player;
+    private Item item;
     private Texture2D p;
 
     public Game1()
