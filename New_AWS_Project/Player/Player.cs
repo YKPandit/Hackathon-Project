@@ -23,7 +23,7 @@ public class Player
     {
         this.player = player;
         this.playerPosition = position;
-        this.width = 10.0f;
+        this.width = 100.0f;
 
         LoadContent();
     }

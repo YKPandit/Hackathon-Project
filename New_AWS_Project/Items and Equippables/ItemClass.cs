@@ -18,8 +18,11 @@ public class Item
     public bool Attacking { get; set; }
     public bool Using { get; set; }
 
-    public Item(string name, string type, string rarity)
+    public Item(Game1 item, Vector2 position, string name, string type, string rarity)
     {
+        this.item = item;
+        this.ItemPosition = position;
+        LoadContent();
         Name = name;
         Type = type;
         Rarity = rarity;
@@ -31,16 +34,15 @@ public class Item
     {
         get
         {
-            return new Rectangle();
+            return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)100f, (int)(ItemSprite.Height*(100f/ItemSprite.Width)));
         }
     }
-
     public virtual void LoadContent(){ // Load item sprite and postition at characters hand area
         // Default sprite load for item is fist
         ItemSprite = item.Content.Load<Texture2D>("Clenched_human_fist");
     }
 
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(ItemSprite, ItemPositionRectangle, Color.White);
     }

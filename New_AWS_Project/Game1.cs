@@ -32,7 +32,7 @@ public class Game1 : Game
 		Window.AllowUserResizing = true;
         base.Initialize();
 		player = new Player(this, new Vector2(100.0f,200.0f));
-        item = new Item("Fist", "Melee", "Common");
+        item = new Item(this, new Vector2(200.0f,100.0f), "Fist", "Melee", "Common");
 		
     }
 
@@ -74,6 +74,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 		_spriteBatch.Begin();
     	player.Draw(gameTime, _spriteBatch);
+        item.Draw(gameTime, _spriteBatch);
     	_spriteBatch.End();
         // TODO: Add your drawing code here
         base.Draw(gameTime);
