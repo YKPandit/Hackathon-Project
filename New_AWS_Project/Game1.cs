@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace New_AWS_Project;
 
@@ -16,16 +17,34 @@ public class Game1 : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+		Window.AllowUserResizing = true;
+		Window.ClientSizeChanged += Window_ClientSizeChanged;
     }
 
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-
+		_graphics.PreferredBackBufferWidth = 800;  // Or your desired width
+		_graphics.PreferredBackBufferHeight = 600; // Or your desired height
+		_graphics.ApplyChanges();
+		_graphics.PreferMultiSampling = true;
+		Window.AllowUserResizing = true;
         base.Initialize();
 		player = new Player(this, new Vector2(100.0f,200.0f));
 		
     }
+
+	protected void Window_ClientSizeChanged(object sender, EventArgs e)
+	{
+    	int width = Window.ClientBounds.Width;
+    	int height = Window.ClientBounds.Height;
+    
+    	_graphics.PreferredBackBufferWidth = width;
+    	_graphics.PreferredBackBufferHeight = height;
+    	_graphics.ApplyChanges();
+	}
+
+
 
     protected override void LoadContent()
     {
