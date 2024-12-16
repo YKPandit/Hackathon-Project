@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/Clenched_human_fist.png","/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/bin/DesktopGL/Content/Clenched_human_fist.xnb","TextureProcessor","Texture2DContent",950277,7990357,0.3045956
 "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/priest1_v1_1.png","/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/bin/DesktopGL/Content/priest1_v1_1.xnb","TextureProcessor","Texture2DContent",350,1109,0.1941206

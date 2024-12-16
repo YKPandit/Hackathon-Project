@@ -37,18 +37,13 @@ public class Item
 
     public virtual void LoadContent(){ // Load item sprite and postition at characters hand area
         // Default sprite load for item is fist
+        ItemSprite = item.Content.Load<Texture2D>("Clenched_human_fist");
     }
 
-    public virtual void attack(){
-        // Default attack method for items is fist
-
-        Attacking = true;
-        
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        spriteBatch.Draw(ItemSprite, ItemPositionRectangle, Color.White);
     }
 
-    public virtual void use(Game1 entity){
-        // Default use method for items is to do nothing
-        Using = true;
-    }
 }
 

@@ -32,6 +32,7 @@ public class Game1 : Game
 		Window.AllowUserResizing = true;
         base.Initialize();
 		player = new Player(this, new Vector2(100.0f,200.0f));
+        item = new Item("Fist", "Melee", "Common");
 		
     }
 

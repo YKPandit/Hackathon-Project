@@ -55,3 +55,4 @@ C:/Users/Yaaska Pandit/RiderProjects/Hackathon-Project/New_AWS_Project/obj/Debug
 /home/ashton/Documents/Hackathon-Project/New_AWS_Project/obj/Debug/net8.0/New AWS Project.genruntimeconfig.cache
 /home/ashton/Documents/Hackathon-Project/New_AWS_Project/obj/Debug/net8.0/ref/New AWS Project.dll
 >>>>>>> 3a872978eec8fade36b947bf6243a89167481efd
+/home/ashton/Documents/Hackathon-Project/New_AWS_Project/bin/Debug/net8.0/Content/Clenched_human_fist.xnb
