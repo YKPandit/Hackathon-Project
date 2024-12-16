@@ -16,7 +16,7 @@ public class Player
     {
         get
         {
-            return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, (int)width, (int)width);
+            return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, (int)width, (int)SpriteHeight);
         }
     }
     public Player(Game1 player, Vector2 position)
