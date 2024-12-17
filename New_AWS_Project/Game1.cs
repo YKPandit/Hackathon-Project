@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 
 namespace New_AWS_Project;
 
@@ -64,9 +65,17 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-
+        bool collision = player.PositionRectangle.Intersects(item.ItemPositionRectangle);
+        Console.WriteLine(collision);
+        if (collision)
+        {
+	        Console.WriteLine("hittin");
+        }
+        
         base.Update(gameTime);
 		player.Update(gameTime);
+
+		
     }
     
     
@@ -82,4 +91,5 @@ public class Game1 : Game
         // TODO: Add your drawing code here
         base.Draw(gameTime);
     }
+    
 }

@@ -30,14 +30,14 @@ public class Item
         Using = false;
     }
 
-    public virtual Rectangle ItemPositionRectangle // Create hitbox for item
+    public Rectangle ItemPositionRectangle // Create hitbox for item
     {
         get
         {
             return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)100f, (int)(ItemSprite.Height*(100f/ItemSprite.Width)));
         }
     }
-    public virtual void LoadContent(){ 
+    public virtual void LoadContent(){ // Load item sprite and postition at characters hand area
         // Default sprite load for item is fist
         ItemSprite = item.Content.Load<Texture2D>("Clenched_human_fist");
     }

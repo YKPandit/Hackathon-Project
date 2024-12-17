@@ -88,4 +88,6 @@ public class Player
 			spriteEffect = SpriteEffects.FlipHorizontally;
 		}
     }
+
+    
 }
