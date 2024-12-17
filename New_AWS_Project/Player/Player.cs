@@ -100,4 +100,6 @@ public class Player
 			spriteEffect = SpriteEffects.None;
 		}
     }
+
+    
 }

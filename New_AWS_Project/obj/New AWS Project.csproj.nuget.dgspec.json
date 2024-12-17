@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon-Project\\New_AWS_Project\\New AWS Project.csproj": {}
+    "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project\\New_AWS_Project\\New AWS Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon-Project\\New_AWS_Project\\New AWS Project.csproj": {
+    "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project\\New_AWS_Project\\New AWS Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon-Project\\New_AWS_Project\\New AWS Project.csproj",
+        "projectUniqueName": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project\\New_AWS_Project\\New AWS Project.csproj",
         "projectName": "New AWS Project",
-        "projectPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon-Project\\New_AWS_Project\\New AWS Project.csproj",
+        "projectPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project\\New_AWS_Project\\New AWS Project.csproj",
         "packagesPath": "C:\\Users\\Yaaska Pandit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon-Project\\New_AWS_Project\\obj\\",
+        "outputPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project\\New_AWS_Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Yaaska Pandit\\AppData\\Roaming\\NuGet\\NuGet.Config"
