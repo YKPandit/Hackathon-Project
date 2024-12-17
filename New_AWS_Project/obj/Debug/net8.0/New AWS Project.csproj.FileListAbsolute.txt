@@ -57,3 +57,4 @@ C:/Users/Yaaska Pandit/RiderProjects/Hackathon-Project/New_AWS_Project/obj/Debug
 C:/Users/Yaaska Pandit/RiderProjects/Hackathon-Project/New_AWS_Project/obj/Debug/net8.0/New AWS Project.pdb
 C:/Users/Yaaska Pandit/RiderProjects/Hackathon-Project/New_AWS_Project/obj/Debug/net8.0/New AWS Project.genruntimeconfig.cache
 C:/Users/Yaaska Pandit/RiderProjects/Hackathon-Project/New_AWS_Project/obj/Debug/net8.0/ref/New AWS Project.dll
+/home/ashton/Documents/Hackathon-Project/New_AWS_Project/bin/Debug/net8.0/Content/3bbc0d500f6805b6e086d8f51ccd1870.xnb

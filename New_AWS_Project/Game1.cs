@@ -11,6 +11,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 	private Player player;
     private Item item;
+    private Item sword;
     private Texture2D p;
 
     public Game1()
@@ -33,6 +34,7 @@ public class Game1 : Game
         base.Initialize();
 		player = new Player(this, new Vector2(100.0f,200.0f));
         item = new Item(this, new Vector2(200.0f,100.0f), "Fist", "Melee", "Common");
+        sword = new Sword(this, new Vector2(400.0f,100.0f), "Sword", "Melee", "Common");
 		
     }
 
@@ -75,6 +77,7 @@ public class Game1 : Game
 		_spriteBatch.Begin();
     	player.Draw(gameTime, _spriteBatch);
         item.Draw(gameTime, _spriteBatch);
+        sword.Draw(gameTime, _spriteBatch);
     	_spriteBatch.End();
         // TODO: Add your drawing code here
         base.Draw(gameTime);

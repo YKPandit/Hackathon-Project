@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Input;
 
 public class Item
 {
-    private Game1 item;
-    private Texture2D ItemSprite { get; set; } // Sprite for item
-    private Vector2 ItemPosition { get; set; } // Position of item on screen
+    protected Game1 item;
+    protected Texture2D ItemSprite { get; set; } // Sprite for item
+    protected Vector2 ItemPosition { get; set; } // Position of item on screen
     public string Name { get; set; }
     public string Type { get; set; }
     public string Rarity { get; set; }
@@ -37,14 +37,24 @@ public class Item
             return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)100f, (int)(ItemSprite.Height*(100f/ItemSprite.Width)));
         }
     }
-    public virtual void LoadContent(){ // Load item sprite and postition at characters hand area
+    public virtual void LoadContent(){ 
         // Default sprite load for item is fist
         ItemSprite = item.Content.Load<Texture2D>("Clenched_human_fist");
     }
 
-    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(ItemSprite, ItemPositionRectangle, Color.White);
+    }
+
+    public virtual void Attack()
+    {
+        Attacking = true;
+    }
+
+    public virtual void Use()
+    {
+        Using = true;
     }
 
 }
