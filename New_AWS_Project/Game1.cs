@@ -12,7 +12,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
 	private Player player;
     private Item item;
-    private Item sword;
+    private Sword sword;
     private Texture2D p;
 
     public Game1()
@@ -68,6 +68,11 @@ public class Game1 : Game
         if (player.PositionRectangle.Intersects(item.ItemPositionRectangle))
         {
 	        player.pickUp(item);
+        }
+
+        if (player.PositionRectangle.Intersects(sword.ItemPositionRectangle))
+        {
+	        player.pickUp(sword);
         }
         
         base.Update(gameTime);
