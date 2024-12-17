@@ -65,7 +65,7 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        if (player.PositionRectangle.Intersects(item.ItemPositionRectangle);)
+        if (player.PositionRectangle.Intersects(item.ItemPositionRectangle))
         {
 	        player.pickUp(item);
         }
