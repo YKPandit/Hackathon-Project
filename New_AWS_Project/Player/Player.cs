@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 
 public class Player
@@ -93,8 +94,9 @@ public class Player
     {
 	    if (lastSlot < 5)
 	    {
+		    Console.WriteLine(lastSlot);
 		    inventory[lastSlot] = item;
-		    item.pickedUp();
+		    item.pickedUpItem();
 		    item.setPosition(playerPosition);
 		    lastSlot++;
 	    }

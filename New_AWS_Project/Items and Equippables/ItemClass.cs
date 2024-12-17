@@ -19,6 +19,7 @@ public class Item
     public bool Using { get; set; }
 
     public float opacity = 1.0f;
+    public bool pickedUp = false;
 
     public Item(Game1 item, Vector2 position, string name, string type, string rarity)
     {
@@ -63,9 +64,10 @@ public class Item
     {
         ItemPosition = newPos;
     }
-    public void pickedUp()
+    public void pickedUpItem()
     {
         opacity = 0.0f;
+        pickedUp = true;
     }
 }
 
