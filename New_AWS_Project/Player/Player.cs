@@ -91,13 +91,13 @@ public class Player
         // The mouse x and y positions are returned relative to the
         // upper-left corner of the game window.
 
-        if(playerPosition.X < current_mouse.X)
-		{
-			spriteEffect = SpriteEffects.FlipHorizontally;
-		}
-		else if(playerPosition.X > current_mouse.X)
+        if(playerPosition.X + playerTexture.Width/2 < current_mouse.X)
 		{
 			spriteEffect = SpriteEffects.None;
+		}
+		else if(playerPosition.X + playerTexture.Width/2 > current_mouse.X)
+		{
+			spriteEffect = SpriteEffects.FlipHorizontally;
 		}
     }
 }
