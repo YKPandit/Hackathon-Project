@@ -30,7 +30,7 @@ public class Item
         Using = false;
     }
 
-    public Rectangle ItemPositionRectangle // Create hitbox for item
+    public virtual Rectangle ItemPositionRectangle // Create hitbox for item
     {
         get
         {
