@@ -9,7 +9,6 @@ public class Player
     private Game1 player;
     private Texture2D playerTexture;
     private Vector2 playerPosition;
-    private float width;
 	private float moveSpeed = 4.0f;
 	private Item[] inventory = new Item[5];
 	private int lastSlot = 0;
@@ -20,14 +19,13 @@ public class Player
     {
         get
         {
-            return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, (int)width, (int)SpriteHeight);
+            return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width, playerTexture.Height);
         }
     }
     public Player(Game1 player, Vector2 position)
     {
         this.player = player;
         this.playerPosition = position;
-        this.width = 100.0f;
 
         LoadContent();
     }
@@ -51,16 +49,6 @@ public class Player
         spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
     }
 	
-	// Height of the player sprite
-	public float SpriteHeight
-    {
-        get
-        {
-            float scale = width / playerTexture.Width;
-            return playerTexture.Height * scale;
-        }
-    }
-
     
 	// Player Movement
 	private void playerMovement(KeyboardState currentKey)
@@ -91,13 +79,13 @@ public class Player
         // The mouse x and y positions are returned relative to the
         // upper-left corner of the game window.
 
-        if(playerPosition.X < current_mouse.X)
-		{
-			spriteEffect = SpriteEffects.FlipHorizontally;
-		}
-		else if(playerPosition.X > current_mouse.X)
+        if(playerPosition.X + playerTexture.Width/2 < current_mouse.X)
 		{
 			spriteEffect = SpriteEffects.None;
+		}
+		else if(playerPosition.X + playerTexture.Width/2 > current_mouse.X)
+		{
+			spriteEffect = SpriteEffects.FlipHorizontally;
 		}
     }
 
