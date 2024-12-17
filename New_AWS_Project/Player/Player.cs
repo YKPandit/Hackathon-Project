@@ -89,5 +89,15 @@ public class Player
 		}
     }
 
-    
+    public void pickUp(Item item)
+    {
+	    if (lastSlot < 5)
+	    {
+		    inventory[lastSlot] = item;
+		    item.pickedUp();
+		    item.setPosition(playerPosition);
+		    lastSlot++;
+	    }
+	    
+    }
 }

@@ -63,11 +63,9 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        bool collision = player.PositionRectangle.Intersects(item.ItemPositionRectangle);
-        Console.WriteLine(collision);
-        if (collision)
+        if (player.PositionRectangle.Intersects(item.ItemPositionRectangle);)
         {
-	        Console.WriteLine("hittin");
+	        player.pickUp(item);
         }
         
         base.Update(gameTime);

@@ -18,6 +18,8 @@ public class Item
     public bool Attacking { get; set; }
     public bool Using { get; set; }
 
+    public float opacity = 1.0f;
+
     public Item(Game1 item, Vector2 position, string name, string type, string rarity)
     {
         this.item = item;
@@ -44,8 +46,16 @@ public class Item
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(ItemSprite, ItemPositionRectangle, Color.White);
+        spriteBatch.Draw(ItemSprite, ItemPositionRectangle, Color.White * opacity);
     }
 
+    public void setPosition(Vector2 newPos)
+    {
+        ItemPosition = newPos;
+    }
+    public void pickedUp()
+    {
+        opacity = 0.0f;
+    }
 }
 
