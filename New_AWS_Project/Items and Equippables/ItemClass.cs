@@ -51,9 +51,23 @@ public class Item
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
-        spriteBatch.Draw(ItemSprite, ItemPosition, null, Color.White * opacity, rotation, ItemOrigin, 0.1f, SpriteEffects.None, 0f);
-    }
+{
+    // Use a single scale factor to maintain aspect ratio
+    float scaleFactor = (ItemPositionRectangle.Width / (float)ItemSprite.Width);
+    
+    spriteBatch.Draw(
+        ItemSprite,
+        ItemPosition,
+        null,
+        Color.White * opacity,
+        rotation,
+        ItemOrigin,
+        new Vector2(scaleFactor, scaleFactor),
+        SpriteEffects.None,
+        0f
+    );
+}
+
 
     public virtual void Attack()
     {
