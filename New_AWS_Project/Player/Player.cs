@@ -50,7 +50,7 @@ public class Player
 
 	    if (inventory[currentSlot] != null)
 	    { 
-		    inventory[currentSlot].Update(playerPosition);
+		    inventory[currentSlot].Update(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	    }
     }
 
@@ -99,7 +99,7 @@ public class Player
 	        currentSlot = 0;
 	        if (inventory[currentSlot] != null)
 	        {
-		        inventory[currentSlot].setPosition(playerPosition);
+		        inventory[currentSlot].setPosition(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	        }
 	        if (oldSlot != -1 && inventory[oldSlot] != null)
 	        {
@@ -112,7 +112,7 @@ public class Player
 	        currentSlot = 1;
 	        if (inventory[currentSlot] != null)
 	        {
-		        inventory[currentSlot].setPosition(playerPosition);
+		        inventory[currentSlot].setPosition(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	        }
 	        if (oldSlot != -1 && inventory[oldSlot] != null)
 	        {
@@ -125,7 +125,7 @@ public class Player
 	        currentSlot = 2;
 	        if (inventory[currentSlot] != null)
 	        {
-		        inventory[currentSlot].setPosition(playerPosition);
+		        inventory[currentSlot].setPosition(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	        }
 	        if (oldSlot != -1 && inventory[oldSlot] != null)
 	        {
@@ -138,7 +138,7 @@ public class Player
 	        currentSlot = 3;
 	        if (inventory[currentSlot] != null)
 	        {
-		        inventory[currentSlot].setPosition(playerPosition);
+		        inventory[currentSlot].setPosition(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	        }
 	        if (oldSlot != -1 && inventory[oldSlot] != null)
 	        {
@@ -151,7 +151,7 @@ public class Player
 	        currentSlot = 4;
 	        if (inventory[currentSlot] != null)
 	        {
-		        inventory[currentSlot].setPosition(playerPosition);
+		        inventory[currentSlot].setPosition(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	        }
 	        if (oldSlot != -1 && inventory[oldSlot] != null)
 	        {
