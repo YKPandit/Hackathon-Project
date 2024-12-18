@@ -25,6 +25,8 @@ public class Item
 	private float scale = 50f;
     public bool pickedUp = false;
 
+    public SpriteEffects spriteEffect = SpriteEffects.None;
+
     public Item(Game1 item, Vector2 position, string name, string type, string rarity)
     {
         this.item = item;
@@ -100,8 +102,16 @@ public class Item
     public void mousePosition(){
         Vector2 mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
         Vector2 dPos = ItemPosition - mousePosition;
-        rotation = (float)Math.Atan2(dPos.Y, dPos.X);
+        rotation = (float)Math.Atan2(-dPos.Y, -dPos.X);
         
+        if(ItemPosition.X + ItemSprite.Width/2 < mousePosition.X)
+        {
+            spriteEffect = SpriteEffects.None;
+        }
+        else if(ItemPosition.X + ItemSprite.Width/2 > mousePosition.X)
+        {
+            spriteEffect = SpriteEffects.FlipHorizontally;
+        }
     }
 
     public void Update(Vector2 pos){

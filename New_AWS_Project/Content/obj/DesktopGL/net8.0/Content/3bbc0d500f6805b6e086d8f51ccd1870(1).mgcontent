@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project/New_AWS_Project/Content/3bbc0d500f6805b6e086d8f51ccd1870(1).png</SourceFile>
-  <SourceTime>2024-12-17T18:19:39.3158429-08:00</SourceTime>
-  <DestFile>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project/New_AWS_Project/Content/bin/DesktopGL/Content/3bbc0d500f6805b6e086d8f51ccd1870(1).xnb</DestFile>
-  <DestTime>2024-12-17T18:19:49.7864987-08:00</DestTime>
+  <SourceFile>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/3bbc0d500f6805b6e086d8f51ccd1870(1).png</SourceFile>
+  <SourceTime>2024-12-18T11:12:45.9698658-08:00</SourceTime>
+  <DestFile>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/bin/DesktopGL/Content/3bbc0d500f6805b6e086d8f51ccd1870(1).xnb</DestFile>
+  <DestTime>2024-12-18T11:13:47.7904361-08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T10:05:56-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -81,9 +81,17 @@ public class Player
         }
 		
 	}
-
+	
 	private void Inventory(KeyboardState currentKey){
-
+		int dropped = 0;
+		if (currentKey.IsKeyDown(Keys.E))
+		{
+			if(dropped == 0)
+			{
+				drop();
+			}
+			dropped++;
+		}
         if (currentKey.IsKeyDown(Keys.D1))
         {
 	        int oldSlot = currentSlot == 0? -1 : currentSlot;
@@ -92,7 +100,6 @@ public class Player
 	        {
 		        inventory[currentSlot].setPosition(playerPosition);
 	        }
-	        Console.WriteLine(oldSlot);
 	        if (oldSlot != -1 && inventory[oldSlot] != null)
 	        {
 		        inventory[oldSlot].pickedUpItem();
@@ -177,5 +184,34 @@ public class Player
 		    item.pickedUpItem();
 		    lastSlot++;
 	    }
+    }
+
+    private int counter = 0;
+    public void drop()
+    {
+	    
+	    Console.WriteLine("Counter:" + counter);
+	    counter++;
+	    Console.WriteLine(inventory[currentSlot].Name);
+	    
+	    
+	    Item droppedItem = inventory[currentSlot];
+	    inventory[currentSlot] = null;
+	    
+	    
+	    if (currentSlot < 5 && inventory[currentSlot + 1] != null)
+	    {
+		    currentSlot += 1;
+	    }
+	    else if (currentSlot > 0 && inventory[currentSlot - 1] != null)
+	    {
+		    currentSlot -= 1;
+	    }
+	    else
+	    {
+		    currentSlot = 0;
+	    }
+
+	    droppedItem.pickedUp = false;
     }
 }
