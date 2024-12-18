@@ -70,12 +70,17 @@ public class Item
     }
     public void pickedUpItem()
     {
-        opacity = 0.0f;
+        opacity *= 0.0f;
         pickedUp = true;
     }
 
 	public void Update(Vector2 pos){
 		ItemPosition = pos;
 	}
+
+    public void setInvis()
+    {
+        opacity = 0.0f;
+    }
 }
 
