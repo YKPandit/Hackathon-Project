@@ -86,7 +86,6 @@ public class Player
 
 	
 	private void Inventory(KeyboardState currentKey){
-		int dropped = 0;
 		if (currentKey.IsKeyDown(Keys.E) && !previousState.IsKeyDown(Keys.E))
 		{
 			drop();
@@ -187,7 +186,6 @@ public class Player
 	    }
     }
 
-    private int counter = 0;
     public void drop()
     {
 	    Item droppedItem = inventory[currentSlot];
