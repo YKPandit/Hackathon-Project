@@ -25,7 +25,7 @@
 /processorParam:TextureFormat=Color
 /build:3bbc0d500f6805b6e086d8f51ccd1870(1).png
 
-#begin Clenched_human_fist.png
+#begin Fist.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +35,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Clenched_human_fist.png
+/build:Fist.png
 
 #begin priest1_v1_1.png
 /importer:TextureImporter

@@ -47,7 +47,7 @@ public class Item
     }
     public virtual void LoadContent(){ // Load item sprite and postition at characters hand area 
         // Default sprite load for item is fist
-        ItemSprite = item.Content.Load<Texture2D>("Clenched_human_fist");
+        ItemSprite = item.Content.Load<Texture2D>("Fist");
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

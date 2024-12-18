@@ -57,7 +57,6 @@ C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project/New_AWS_Project/bin/Debug
 C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project/New_AWS_Project/obj/Debug/net8.0/New AWS .ACAAC51D.Up2Date
 C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project/New_AWS_Project/obj/Debug/net8.0/New AWS Project.genruntimeconfig.cache
 C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project/New_AWS_Project/obj/Debug/net8.0/ref/New AWS Project.dll
-/home/ashton/Documents/Hackathon-Project/New_AWS_Project/bin/Debug/net8.0/Content/Clenched_human_fist.xnb
 /home/ashton/Documents/Hackathon-Project/New_AWS_Project/bin/Debug/net8.0/Content/priest1_v1_1.xnb
 /home/ashton/Documents/Hackathon-Project/New_AWS_Project/bin/Debug/net8.0/New AWS Project
 /home/ashton/Documents/Hackathon-Project/New_AWS_Project/bin/Debug/net8.0/New AWS Project.deps.json
@@ -116,3 +115,4 @@ C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/obj/Debug/
 C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/obj/Debug/net8.0/New AWS Project.pdb
 C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/obj/Debug/net8.0/New AWS Project.genruntimeconfig.cache
 C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/obj/Debug/net8.0/ref/New AWS Project.dll
+/home/ashton/Documents/Hackathon-Project/New_AWS_Project/bin/Debug/net8.0/Content/Fist.xnb
