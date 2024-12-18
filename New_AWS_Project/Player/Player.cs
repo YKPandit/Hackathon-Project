@@ -45,6 +45,7 @@ public class Player
 		KeyboardState currentKeyboardState = Keyboard.GetState();
 		mousePosition();
     	playerMovement(currentKeyboardState);
+		Inventory(currentKeyboardState);
 
 	    if (inventory[currentSlot] != null)
 	    { 
@@ -78,6 +79,9 @@ public class Player
         {
             playerPosition.X += moveSpeed;
         }
+	}
+
+	private void Inventory(KeyboardState currentKey){
 
         if (currentKey.IsKeyDown(Keys.D1))
         {
@@ -145,7 +149,6 @@ public class Player
 	        }
         }
 	}
-
 
     private void mousePosition()
     {
