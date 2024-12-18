@@ -13,50 +13,56 @@ public class Game1 : Game
 	private Player player;
     private Item item;
     private Sword sword;
-    private Texture2D p;
+
+    //desired Game resolution
+    private int _resolutionWidth = 640;
+    private int _resolutionHeight = 360;
+    
+    //resolution we render at
+    private int _virtualWidth = 640;
+    private int _virtualHeight = 360;
+    private Matrix _screenScaleMatrix;
+    private Viewport _viewport;
+    // Flags
+    private bool _isResizing;
 
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
+        _graphics.PreferredBackBufferWidth = _resolutionWidth;
+		_graphics.PreferredBackBufferHeight = _resolutionHeight;
+		_graphics.ApplyChanges();
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-		Window.AllowUserResizing = true;
-		Window.ClientSizeChanged += Window_ClientSizeChanged;
-    }
 
+		Window.AllowUserResizing = true;
+        Window.ClientSizeChanged += OnClientSizeChanged;
+    }
+    private void OnClientSizeChanged(object sender, EventArgs e)
+    {
+        if (!_isResizing && Window.ClientBounds.Width > 0 && Window.ClientBounds.Height > 0)
+        {
+            _isResizing = true;
+            UpdateScreenScaleMatrix();
+            _isResizing = false;
+        }
+    }
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-		_graphics.PreferredBackBufferWidth = 800;  // Or your desired width
-		_graphics.PreferredBackBufferHeight = 600; // Or your desired height
-		_graphics.ApplyChanges();
-		_graphics.PreferMultiSampling = true;
-		Window.AllowUserResizing = true;
-        base.Initialize();
-		player = new Player(this, new Vector2(100.0f,200.0f));
+        player = new Player(this, new Vector2(100.0f,200.0f));
         item = new Item(this, new Vector2(200.0f,100.0f), "Fist", "Melee", "Common");
         sword = new Sword(this, new Vector2(400.0f,100.0f), "Sword", "Melee", "Common");
+        UpdateScreenScaleMatrix();
+        base.Initialize();
 		
     }
-
-	protected void Window_ClientSizeChanged(object sender, EventArgs e)
-	{
-    	int width = Window.ClientBounds.Width;
-    	int height = Window.ClientBounds.Height;
-    
-    	_graphics.PreferredBackBufferWidth = width;
-    	_graphics.PreferredBackBufferHeight = height;
-    	_graphics.ApplyChanges();
-	}
-
-
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         // TODO: use this.Content to load your game content here
 
-        p = Content.Load<Texture2D>("priest1_v1_1");
     }
 
     protected override void Update(GameTime gameTime)
@@ -81,12 +87,14 @@ public class Game1 : Game
 		
     }
     
-    
 
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
-		_spriteBatch.Begin();
+
+        GraphicsDevice.Viewport = _viewport;
+        
+		_spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _screenScaleMatrix);
     	player.Draw(gameTime, _spriteBatch);
         item.Draw(gameTime, _spriteBatch);
         sword.Draw(gameTime, _spriteBatch);
@@ -95,4 +103,35 @@ public class Game1 : Game
         base.Draw(gameTime);
     }
     
+    private void UpdateScreenScaleMatrix()
+    {
+        // Size of actual screen
+        float screenWidth = GraphicsDevice.PresentationParameters.BackBufferWidth;
+        float screenHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
+
+        // Calculate virtual resolution based on current screen width and height
+        if (screenWidth/ _resolutionWidth > screenHeight / _resolutionHeight)
+        {
+            float aspect = screenHeight / _resolutionHeight;
+            _virtualWidth = (int)(aspect * _resolutionWidth);
+            _virtualHeight = (int)screenHeight;
+        }
+        else {
+            float aspect = screenWidth / _resolutionWidth;
+            _virtualWidth = (int)screenWidth;
+            _virtualHeight = (int)(aspect * _resolutionHeight);
+        }
+
+        _screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)_resolutionWidth);
+
+        _viewport = new Viewport{
+            X = (int)(screenWidth / 2 - _virtualWidth / 2),
+            Y = (int)(screenHeight / 2 - _virtualHeight / 2),
+            Width = _virtualWidth,
+            Height = _virtualHeight,
+            MinDepth = 0,
+            MaxDepth = 1
+        };
+        
+    }
 }
