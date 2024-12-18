@@ -15,6 +15,7 @@ public class Player
 	private int lastSlot = 0;
 	private int currentSlot = 0;
 	private SpriteEffects spriteEffect = SpriteEffects.None;
+	private KeyboardState previousState = Keyboard.GetState();
 	
 
    
@@ -82,16 +83,16 @@ public class Player
 		
 	}
 	
+
+	
 	private void Inventory(KeyboardState currentKey){
 		int dropped = 0;
-		if (currentKey.IsKeyDown(Keys.E))
+		if (currentKey.IsKeyDown(Keys.E) && !previousState.IsKeyDown(Keys.E))
 		{
-			if(dropped == 0)
-			{
-				drop();
-			}
-			dropped++;
+			drop();
 		}
+		previousState = currentKey;
+
         if (currentKey.IsKeyDown(Keys.D1))
         {
 	        int oldSlot = currentSlot == 0? -1 : currentSlot;
@@ -189,12 +190,6 @@ public class Player
     private int counter = 0;
     public void drop()
     {
-	    
-	    Console.WriteLine("Counter:" + counter);
-	    counter++;
-	    Console.WriteLine(inventory[currentSlot].Name);
-	    
-	    
 	    Item droppedItem = inventory[currentSlot];
 	    inventory[currentSlot] = null;
 	    
@@ -206,12 +201,15 @@ public class Player
 	    else if (currentSlot > 0 && inventory[currentSlot - 1] != null)
 	    {
 		    currentSlot -= 1;
+			lastSlot--;
 	    }
 	    else
 	    {
 		    currentSlot = 0;
+			lastSlot--;
 	    }
-
+		
+		droppedItem.setPosition(new Vector2(playerPosition.X + 20, playerPosition.Y));
 	    droppedItem.pickedUp = false;
     }
 }
