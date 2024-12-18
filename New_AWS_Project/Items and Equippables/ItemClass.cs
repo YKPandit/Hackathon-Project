@@ -42,7 +42,29 @@ public class Item
     {
         get
         {
-            return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)ItemSprite.Width, (int)ItemSprite.Height);
+            int x, y, w, h;
+            if (rotation != 0)
+            {
+                var cos = Math.Abs(Math.Cos(rotation));
+                var sin = Math.Abs(Math.Sin(rotation));
+                var t1_opp = ItemSprite.Width * cos;
+                var t1_adj = Math.Sqrt(Math.Pow(ItemSprite.Width, 2) - Math.Pow(t1_opp, 2));
+                var t2_opp = ItemSprite.Height * sin;
+                var t2_adj = Math.Sqrt(Math.Pow(ItemSprite.Height, 2) - Math.Pow(t2_opp, 2));
+
+                w = (int)(t1_opp + t2_opp);
+                h = (int)(t1_adj + t2_adj);
+                x = (int)(ItemPosition.X - (w / 2));
+                y = (int)(ItemPosition.Y - (h / 2));
+            }
+            else
+            {
+                x = (int)ItemPosition.X;
+                y = (int)ItemPosition.Y;
+                w = ItemSprite.Width;
+                h = ItemSprite.Height;
+            }
+            return new Rectangle(x, y, w, h);
         }
     }
     public virtual void LoadContent(){ // Load item sprite and postition at characters hand area 
