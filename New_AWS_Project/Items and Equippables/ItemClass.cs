@@ -19,6 +19,7 @@ public class Item
     public bool Using { get; set; }
 
     public float opacity = 1.0f;
+	private float scale = 50f;
     public bool pickedUp = false;
 
     public Item(Game1 item, Vector2 position, string name, string type, string rarity)
@@ -37,7 +38,7 @@ public class Item
     {
         get
         {
-            return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)100f, (int)(ItemSprite.Height*(100f/ItemSprite.Width)));
+            return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)scale, (int)(ItemSprite.Height*(scale/ItemSprite.Width)));
         }
     }
     public virtual void LoadContent(){ // Load item sprite and postition at characters hand area 
@@ -63,11 +64,18 @@ public class Item
     public void setPosition(Vector2 newPos)
     {
         ItemPosition = newPos;
+		scale = 15.0f;
+		opacity = 1.0f;
+
     }
     public void pickedUpItem()
     {
         opacity = 0.0f;
         pickedUp = true;
     }
+
+	public void Update(Vector2 pos){
+		ItemPosition = pos;
+	}
 }
 

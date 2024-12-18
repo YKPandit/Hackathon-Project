@@ -13,7 +13,9 @@ public class Player
 	private float moveSpeed = 4.0f;
 	private Item[] inventory = new Item[5];
 	private int lastSlot = 0;
+	private int currentSlot = 0;
 	private SpriteEffects spriteEffect = SpriteEffects.None;
+	
 
    
     public Rectangle PositionRectangle
@@ -43,6 +45,11 @@ public class Player
 		KeyboardState currentKeyboardState = Keyboard.GetState();
 		mousePosition();
     	playerMovement(currentKeyboardState);
+
+	    if (inventory[currentSlot] != null)
+	    { 
+		    inventory[currentSlot].Update(playerPosition);
+	    }
     }
 
 	public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -54,6 +61,7 @@ public class Player
 	// Player Movement
 	private void playerMovement(KeyboardState currentKey)
 	{
+		// Movement checking
 		if (currentKey.IsKeyDown(Keys.W))
         {
             playerPosition.Y -= moveSpeed;
@@ -69,6 +77,12 @@ public class Player
         if (currentKey.IsKeyDown(Keys.D))
         {
             playerPosition.X += moveSpeed;
+        }
+
+        if (currentKey.IsKeyDown(Keys.D1))
+        {
+	        inventory[0].setPosition(playerPosition);
+	        currentSlot = 0;
         }
 	}
 
@@ -97,9 +111,8 @@ public class Player
 		    Console.WriteLine(lastSlot);
 		    inventory[lastSlot] = item;
 		    item.pickedUpItem();
-		    item.setPosition(playerPosition);
 		    lastSlot++;
+		    currentSlot++;
 	    }
-	    
     }
 }
