@@ -22,7 +22,6 @@ public class Item
     public bool Using { get; set; }
 
     public float opacity = 1.0f;
-	private float scale = 50f;
     public bool pickedUp = false;
 
     public SpriteEffects spriteEffect = SpriteEffects.None;
@@ -43,32 +42,29 @@ public class Item
     {
         get
         {
-            return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)scale, (int)(ItemSprite.Height*(scale/ItemSprite.Width)));
+            return new Rectangle((int)ItemPosition.X, (int)ItemPosition.Y, (int)ItemSprite.Width, (int)ItemSprite.Height);
         }
     }
     public virtual void LoadContent(){ // Load item sprite and postition at characters hand area 
         // Default sprite load for item is fist
         ItemSprite = item.Content.Load<Texture2D>("Clenched_human_fist");
-        ItemOrigin = new Vector2(ItemSprite.Width / 2f, ItemSprite.Height / 2f);
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-{
-    // Use a single scale factor to maintain aspect ratio
-    float scaleFactor = (ItemPositionRectangle.Width / (float)ItemSprite.Width);
-    
-    spriteBatch.Draw(
-        ItemSprite,
-        ItemPosition,
-        null,
-        Color.White * opacity,
-        rotation,
-        ItemOrigin,
-        new Vector2(scaleFactor, scaleFactor),
-        SpriteEffects.None,
-        0f
-    );
-}
+    {
+        
+        spriteBatch.Draw(
+            ItemSprite,
+            ItemPosition,
+            null,
+            Color.White * opacity,
+            rotation,
+            ItemOrigin,
+            1f,
+            spriteEffect,
+            0f
+        );
+    }
 
 
     public virtual void Attack()
@@ -84,7 +80,6 @@ public class Item
     public void setPosition(Vector2 newPos)
     {
         ItemPosition = newPos;
-		scale = 15.0f;
 		opacity = 1.0f;
 
     }
@@ -102,7 +97,7 @@ public class Item
     public void mousePosition(){
         Vector2 mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
         Vector2 dPos = ItemPosition - mousePosition;
-        rotation = (float)Math.Atan2(-dPos.Y, -dPos.X);
+        rotation = (float)Math.Atan2(dPos.Y, dPos.X);
         
         if(ItemPosition.X + ItemSprite.Width/2 < mousePosition.X)
         {
@@ -110,12 +105,13 @@ public class Item
         }
         else if(ItemPosition.X + ItemSprite.Width/2 > mousePosition.X)
         {
-            spriteEffect = SpriteEffects.FlipHorizontally;
+            spriteEffect = SpriteEffects.FlipVertically;
         }
     }
 
     public void Update(Vector2 pos){
 		ItemPosition = pos;
+        ItemOrigin = new Vector2(ItemSprite.Width, ItemSprite.Height / 2f);
         mousePosition();
 	}
 }
