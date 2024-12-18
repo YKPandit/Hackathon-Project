@@ -81,8 +81,68 @@ public class Player
 
         if (currentKey.IsKeyDown(Keys.D1))
         {
-	        inventory[0].setPosition(playerPosition);
+	        int oldSlot = currentSlot;
 	        currentSlot = 0;
+	        if (inventory[currentSlot] != null)
+	        {
+		        if (inventory[oldSlot] != null)
+		        {
+			        inventory[oldSlot].pickedUpItem();
+		        }
+		        inventory[currentSlot].setPosition(playerPosition);
+	        }
+        }
+        if (currentKey.IsKeyDown(Keys.D2))
+        {
+	        int oldSlot = currentSlot;
+	        currentSlot = 1;
+	        if (inventory[currentSlot] != null)
+	        {
+		        if (inventory[oldSlot] != null)
+		        {
+			        inventory[oldSlot].pickedUpItem();
+		        }
+		        inventory[currentSlot].setPosition(playerPosition);
+	        }
+        }
+        if (currentKey.IsKeyDown(Keys.D3))
+        {
+	        int oldSlot = currentSlot;
+	        currentSlot = 2;
+	        if (inventory[currentSlot] != null)
+	        {
+		        if (inventory[oldSlot] != null)
+		        {
+			        inventory[oldSlot].pickedUpItem();
+		        }
+		        inventory[currentSlot].setPosition(playerPosition);
+	        }
+        }
+        if (currentKey.IsKeyDown(Keys.D4))
+        {
+	        int oldSlot = currentSlot;
+	        currentSlot = 3;
+	        if (inventory[currentSlot] != null)
+	        {
+		        if (inventory[oldSlot] != null)
+		        {
+			        inventory[oldSlot].pickedUpItem();
+		        }
+		        inventory[currentSlot].setPosition(playerPosition);
+	        }
+        }
+        if (currentKey.IsKeyDown(Keys.D5))
+        {
+	        int oldSlot = currentSlot;
+	        currentSlot = 4;
+	        if (inventory[currentSlot] != null)
+	        {
+		        if (inventory[oldSlot] != null)
+		        {
+			        inventory[oldSlot].pickedUpItem();
+		        }
+		        inventory[currentSlot].setPosition(playerPosition);
+	        }
         }
 	}
 
