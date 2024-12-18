@@ -79,6 +79,7 @@ public class Player
         {
             playerPosition.X += moveSpeed;
         }
+		
 	}
 
 	private void Inventory(KeyboardState currentKey){
@@ -172,7 +173,6 @@ public class Player
     {
 	    if (lastSlot < 5)
 	    {
-		    Console.WriteLine(lastSlot);
 		    inventory[lastSlot] = item;
 		    item.pickedUpItem();
 		    lastSlot++;

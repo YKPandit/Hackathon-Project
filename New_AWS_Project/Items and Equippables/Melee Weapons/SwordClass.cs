@@ -20,7 +20,7 @@ public class Sword : Item
     }
     public override void LoadContent(){ 
         // Load sword sprite
-        base.ItemSprite = item.Content.Load<Texture2D>("3bbc0d500f6805b6e086d8f51ccd1870");
+        base.ItemSprite = item.Content.Load<Texture2D>("3bbc0d500f6805b6e086d8f51ccd1870(1)");
     }
 
 
