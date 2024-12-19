@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-
 public class Player
 {
     private Game1 player;
@@ -41,10 +40,10 @@ public class Player
         playerTexture = player.Content.Load<Texture2D>("priest1_v1_1");
     }
     
-    public void Update(GameTime gameTime)
+    public void Update(GameTime gameTime, Matrix transforMatrix)
     {
 		KeyboardState currentKeyboardState = Keyboard.GetState();
-		mousePosition();
+		mousePosition(Matrix.Invert(transforMatrix));
     	playerMovement(currentKeyboardState);
 		Inventory(currentKeyboardState);
 
@@ -160,21 +159,25 @@ public class Player
         }
 	}
 
-    private void mousePosition()
+    private void mousePosition(Matrix transforMatrix)
     {
-        MouseState current_mouse = Mouse.GetState();
+        Vector2 currentMousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+		Vector2 globalMousePosition = Vector2.Transform(currentMousePosition, transforMatrix);
 
         // The mouse x and y positions are returned relative to the
         // upper-left corner of the game window.
+		
 
-        if(playerPosition.X + playerTexture.Width/2 < current_mouse.X)
+        if(playerPosition.X + playerTexture.Width/2 <= globalMousePosition.X)
 		{
 			spriteEffect = SpriteEffects.None;
 		}
-		else if(playerPosition.X + playerTexture.Width/2 > current_mouse.X)
+		else if(playerPosition.X + playerTexture.Width/2 > globalMousePosition.X)
 		{
 			spriteEffect = SpriteEffects.FlipHorizontally;
 		}
+
+		inventory[currentSlot]?.mousePosition(globalMousePosition);
     }
 
     public void pickUp(Item item)
