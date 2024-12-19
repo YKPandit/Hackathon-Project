@@ -15,6 +15,9 @@ public class Player
 	private int currentSlot = 0;
 	private SpriteEffects spriteEffect = SpriteEffects.None;
 	private KeyboardState previousState = Keyboard.GetState();
+
+	private int screenWidth;
+	private int screenHeight;
 	
 
    
@@ -29,7 +32,10 @@ public class Player
     {
         this.player = player;
         this.playerPosition = position;
-
+		
+		
+		screenWidth = player.GraphicsDevice.Viewport.Width;
+		screenHeight = player.GraphicsDevice.Viewport.Height;
         LoadContent();
     }
     
@@ -46,7 +52,8 @@ public class Player
 		mousePosition(Matrix.Invert(transformMatrix));
     	playerMovement(currentKeyboardState);
 		Inventory(currentKeyboardState);
-
+		
+		ClampToScreen();
 	    if (inventory[currentSlot] != null)
 	    { 
 		    inventory[currentSlot].Update(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
@@ -84,7 +91,7 @@ public class Player
 
 	
 	private void Inventory(KeyboardState currentKey){
-		if (currentKey.IsKeyDown(Keys.E) && !previousState.IsKeyDown(Keys.E))
+		if (currentKey.IsKeyDown(Keys.E) && !previousState.IsKeyDown(Keys.E) && inventory[currentSlot] != null)
 		{
 			drop();
 		}
@@ -178,7 +185,7 @@ public class Player
 
     public void pickUp(Item item)
     {
-	    if (lastSlot < 5)
+	    if (lastSlot < 5 && Keyboard.GetState().IsKeyDown(Keys.Q))
 	    {
 		    inventory[lastSlot] = item;
 		    item.pickedUpItem();
@@ -210,4 +217,21 @@ public class Player
 		droppedItem.setPosition(new Vector2(playerPosition.X + 100, playerPosition.Y));
 	    droppedItem.pickedUp = false;
     }
+
+	
+
+	// In your Update method, after movement calculation but before setting final position:
+	private void ClampToScreen()
+	{
+    	// Assuming playerPosition is your Vector2 position
+    	// And playerTexture is your player's texture
+    	float minX = playerTexture.Width / 2f;
+    	float minY = playerTexture.Height / 2f;
+    	float maxX = screenWidth - (playerTexture.Width / 2f);
+    	float maxY = screenHeight - (playerTexture.Height / 2f);
+
+    	playerPosition.X = Math.Clamp(playerPosition.X, minX, maxX);
+    	playerPosition.Y = Math.Clamp(playerPosition.Y, minY, maxY);
+	}
+
 }
