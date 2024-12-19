@@ -37,6 +37,10 @@ public class Item
         Using = false;
     }
 
+    public Texture2D getTexture()
+    {
+        return ItemSprite;
+    }
     public virtual Rectangle ItemPositionRectangle // Create hitbox for item
     {
         get

@@ -21,6 +21,8 @@ public class Player
 
 	private Texture2D inventorySprite;
 	private Vector2 inventoryPosition;
+	private Vector2[] inventorySlots = new Vector2[4];
+	private Texture2D[] inventorySprites = new Texture2D[4];
 
    
     public Rectangle PositionRectangle
@@ -39,6 +41,12 @@ public class Player
 		screenWidth = player.GraphicsDevice.Viewport.Width;
 		screenHeight = player.GraphicsDevice.Viewport.Height;
 		inventoryPosition = new Vector2(screenWidth-75, screenHeight-29);
+
+		inventorySlots[0] = new Vector2(inventoryPosition.X + 12, inventoryPosition.Y + 14);
+		for(int i = 1; i < 4; i++)
+		{
+			inventorySlots[i] = new Vector2(inventorySlots[i-1].X + 17, inventorySlots[i-1].Y);
+		}
         LoadContent();
     }
     
@@ -68,6 +76,14 @@ public class Player
     {
         spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
 		spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
+		for(int i = 0; i < 4; i++)
+		{
+			if(inventorySprites[i] != null)
+			{
+				spriteBatch.Draw(inventorySprites[i], inventorySlots[i], null, Color.White, 0f, Vector2.Zero, new Vector2(0.2f,0.2f), SpriteEffects.None, 0f);
+			}
+			
+		}
     }
 	
     
@@ -192,9 +208,12 @@ public class Player
     {
 	    if (lastSlot < 4 && Keyboard.GetState().IsKeyDown(Keys.Q))
 	    {
+			inventorySprites[lastSlot] = item.getTexture();
 		    inventory[lastSlot] = item;
 		    item.pickedUpItem();
 		    lastSlot++;
+
+			
 	    }
     }
 

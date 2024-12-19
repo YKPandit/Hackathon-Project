@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/3bbc0d500f6805b6e086d8f51ccd1870(1).png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/Fist.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/priest1_v1_1.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/Sample-InventorySlotsSet_Single.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
