@@ -21,7 +21,7 @@ public class Game1 : Game
     //resolution we render at
     private int _virtualWidth = 640;
     private int _virtualHeight = 360;
-    private Matrix _screenScaleMatrix;
+    public Matrix _screenScaleMatrix;
     private Viewport _viewport;
     // Flags
     private bool _isResizing;
@@ -82,9 +82,7 @@ public class Game1 : Game
         }
         
         base.Update(gameTime);
-		player.Update(gameTime);
-
-		
+		player.Update(gameTime, _screenScaleMatrix);
     }
     
 
@@ -93,7 +91,7 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         GraphicsDevice.Viewport = _viewport;
-        
+
 		_spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _screenScaleMatrix);
     	player.Draw(gameTime, _spriteBatch);
         item.Draw(gameTime, _spriteBatch);

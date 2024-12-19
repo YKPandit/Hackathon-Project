@@ -2,7 +2,7 @@
 // I.e name, description, value, rarity, weight, etc
 // Also includes methods for attack, use, etc.
 
-using New_AWS_Project;
+namespace New_AWS_Project;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,7 +20,6 @@ public class Item
     public string Rarity { get; set; }
     public bool Attacking { get; set; }
     public bool Using { get; set; }
-
     public float opacity = 1.0f;
     public bool pickedUp = false;
 
@@ -116,8 +115,7 @@ public class Item
         opacity = 0.0f;
     }
 
-    public void mousePosition(){
-        Vector2 mousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+    public void mousePosition(Vector2 mousePosition){
         Vector2 dPos = ItemPosition - mousePosition;
         rotation = (float)Math.Atan2(dPos.Y, dPos.X);
         
@@ -134,7 +132,6 @@ public class Item
     public void Update(Vector2 pos){
 		ItemPosition = pos;
         ItemOrigin = new Vector2(ItemSprite.Width, ItemSprite.Height / 2f);
-        mousePosition();
 	}
 }
 
