@@ -18,7 +18,9 @@ public class Player
 
 	private int screenWidth;
 	private int screenHeight;
-	
+
+	private Texture2D inventorySprite;
+	private Vector2 inventoryPosition;
 
    
     public Rectangle PositionRectangle
@@ -36,6 +38,7 @@ public class Player
 		
 		screenWidth = player.GraphicsDevice.Viewport.Width;
 		screenHeight = player.GraphicsDevice.Viewport.Height;
+		inventoryPosition = new Vector2(screenWidth-75, screenHeight-29);
         LoadContent();
     }
     
@@ -44,6 +47,7 @@ public class Player
     public void LoadContent()
     {
         playerTexture = player.Content.Load<Texture2D>("priest1_v1_1");
+		inventorySprite = player.Content.Load<Texture2D>("Sample-InventorySlotsSet_Single");
     }
     
     public void Update(GameTime gameTime, Matrix transformMatrix)
@@ -63,6 +67,7 @@ public class Player
 	public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
+		spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
     }
 	
     
@@ -185,7 +190,7 @@ public class Player
 
     public void pickUp(Item item)
     {
-	    if (lastSlot < 5 && Keyboard.GetState().IsKeyDown(Keys.Q))
+	    if (lastSlot < 4 && Keyboard.GetState().IsKeyDown(Keys.Q))
 	    {
 		    inventory[lastSlot] = item;
 		    item.pickedUpItem();

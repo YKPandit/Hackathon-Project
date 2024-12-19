@@ -144,3 +144,4 @@ C:\Users\Yaaska Pandit\RiderProjects\HackathonProject\New_AWS_Project\obj\Debug\
 C:\Users\Yaaska Pandit\RiderProjects\HackathonProject\New_AWS_Project\obj\Debug\net8.0\New AWS Project.pdb
 C:\Users\Yaaska Pandit\RiderProjects\HackathonProject\New_AWS_Project\obj\Debug\net8.0\New AWS Project.genruntimeconfig.cache
 C:\Users\Yaaska Pandit\RiderProjects\HackathonProject\New_AWS_Project\obj\Debug\net8.0\ref\New AWS Project.dll
+C:\Users\Yaaska Pandit\RiderProjects\HackathonProject\New_AWS_Project\bin\Debug\net8.0\Content\Sample-InventorySlotsSet_Single.xnb
