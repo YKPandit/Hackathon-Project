@@ -40,10 +40,10 @@ public class Player
         playerTexture = player.Content.Load<Texture2D>("priest1_v1_1");
     }
     
-    public void Update(GameTime gameTime, Matrix transforMatrix)
+    public void Update(GameTime gameTime, Matrix transformMatrix)
     {
 		KeyboardState currentKeyboardState = Keyboard.GetState();
-		mousePosition(Matrix.Invert(transforMatrix));
+		mousePosition(Matrix.Invert(transformMatrix));
     	playerMovement(currentKeyboardState);
 		Inventory(currentKeyboardState);
 
@@ -79,7 +79,6 @@ public class Player
         {
             playerPosition.X += moveSpeed;
         }
-		
 	}
 	
 
@@ -158,23 +157,18 @@ public class Player
         }
 	}
 
-    private void mousePosition(Matrix transforMatrix)
+    private void mousePosition(Matrix transformMatrix)
     {
         Vector2 currentMousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-		Vector2 globalMousePosition = Vector2.Transform(currentMousePosition, transforMatrix);
+		Vector2 globalMousePosition = Vector2.Transform(currentMousePosition, transformMatrix);
 
         // The mouse x and y positions are returned relative to the
-        // upper-left corner of the game window.
-		Vector2 playerScaled = Vector2.Transform(playerPosition, transforMatrix);
-		
-		Vector2 textureScaled = new Vector2(playerTexture.Width, playerTexture.Height);
-		textureScaled = Vector2.Transform(textureScaled, transforMatrix);
-
-        if(playerPosition.X + textureScaled.X/2 <= globalMousePosition.X)
+        // upper-left corner of the game window
+        if(playerPosition.X + playerTexture.Width/2f < globalMousePosition.X)
 		{
 			spriteEffect = SpriteEffects.None;
 		}
-		else if(playerPosition.X + textureScaled.X/2 > globalMousePosition.X)
+		else if(playerPosition.X + playerTexture.Width/2f > globalMousePosition.X)
 		{
 			spriteEffect = SpriteEffects.FlipHorizontally;
 		}
@@ -213,7 +207,7 @@ public class Player
 			lastSlot--;
 	    }
 		
-		droppedItem.setPosition(new Vector2(playerPosition.X + 20, playerPosition.Y));
+		droppedItem.setPosition(new Vector2(playerPosition.X + 100, playerPosition.Y));
 	    droppedItem.pickedUp = false;
     }
 }
