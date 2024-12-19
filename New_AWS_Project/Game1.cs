@@ -120,7 +120,7 @@ public class Game1 : Game
             _virtualHeight = (int)(aspect * _resolutionHeight);
         }
 
-        _screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)_resolutionWidth);
+        _screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)_resolutionWidth, _virtualHeight / (float)_resolutionHeight, 1.0f);
 
         _viewport = new Viewport{
             X = (int)(screenWidth / 2 - _virtualWidth / 2),
