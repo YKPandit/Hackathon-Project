@@ -232,6 +232,7 @@ public class Player
     {
 	    Item droppedItem = inventory[currentSlot];
 	    inventory[currentSlot] = null;
+	    inventorySprites[currentSlot] = null;
 	    
 	    
 	    if (currentSlot < 5 && inventory[currentSlot + 1] != null)
