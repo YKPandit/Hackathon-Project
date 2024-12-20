@@ -1,18 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Diagnostics;
-
-namespace New_AWS_Project;
+﻿namespace New_AWS_Project;
 
 public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-	private Player player;
-    private Item item;
-    private Sword sword;
+    private GameManager GameManager;
 
     //desired Game resolution
     private int _resolutionWidth = 640;
@@ -21,7 +13,6 @@ public class Game1 : Game
     //resolution we render at
     private int _virtualWidth = 640;
     private int _virtualHeight = 360;
-    public Matrix _screenScaleMatrix;
     private Viewport _viewport;
     // Flags
     private bool _isResizing;
@@ -37,6 +28,8 @@ public class Game1 : Game
 
 		Window.AllowUserResizing = true;
         Window.ClientSizeChanged += OnClientSizeChanged;
+
+        Globals.game1 = this;
     }
     private void OnClientSizeChanged(object sender, EventArgs e)
     {
@@ -50,9 +43,8 @@ public class Game1 : Game
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
-        player = new Player(this, new Vector2(100.0f,200.0f));
-        item = new Item(this, new Vector2(200.0f,100.0f), "Fist", "Melee", "Common");
-        sword = new Sword(this, new Vector2(400.0f,100.0f), "Sword", "Melee", "Common");
+        Globals.Content = Content;
+        GameManager = new GameManager();
         UpdateScreenScaleMatrix();
         base.Initialize();
 		
@@ -61,7 +53,9 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
+        Globals._spriteBatch = _spriteBatch;
         // TODO: use this.Content to load your game content here
+
 
     }
 
@@ -71,18 +65,11 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        if (player.PositionRectangle.Intersects(item.ItemPositionRectangle) && !item.pickedUp)
-        {
-	        player.pickUp(item);
-        }
-
-        if (player.PositionRectangle.Intersects(sword.ItemPositionRectangle) && !sword.pickedUp)
-        {
-	        player.pickUp(sword);
-        }
+        Globals.Update(gameTime);
+        GameManager.Update(gameTime);
         
         base.Update(gameTime);
-		player.Update(gameTime, _screenScaleMatrix);
+
     }
     
 
@@ -92,11 +79,9 @@ public class Game1 : Game
 
         GraphicsDevice.Viewport = _viewport;
 
-		_spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: _screenScaleMatrix);
-    	player.Draw(gameTime, _spriteBatch);
-        item.Draw(gameTime, _spriteBatch);
-        sword.Draw(gameTime, _spriteBatch);
-    	_spriteBatch.End();
+		Globals._spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Globals._screenScaleMatrix);
+        GameManager.Draw(gameTime);
+    	Globals._spriteBatch.End();
         // TODO: Add your drawing code here
         base.Draw(gameTime);
     }
@@ -120,7 +105,7 @@ public class Game1 : Game
             _virtualHeight = (int)(aspect * _resolutionHeight);
         }
 
-        _screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)_resolutionWidth, _virtualHeight / (float)_resolutionHeight, 1.0f);
+        Globals._screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)_resolutionWidth, _virtualHeight / (float)_resolutionHeight, 1.0f);
 
         _viewport = new Viewport{
             X = (int)(screenWidth / 2 - _virtualWidth / 2),

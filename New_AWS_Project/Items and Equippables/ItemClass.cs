@@ -3,14 +3,9 @@
 // Also includes methods for attack, use, etc.
 
 namespace New_AWS_Project;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System; 
 
 public class Item
 {
-    protected Game1 item;
     protected Texture2D ItemSprite { get; set; } // Sprite for item
     protected Vector2 ItemPosition { get; set; } // Position of item on screen
     protected Vector2 ItemOrigin { get; set; } // Position to rotate
@@ -25,9 +20,8 @@ public class Item
 
     public SpriteEffects spriteEffect = SpriteEffects.None;
 
-    public Item(Game1 item, Vector2 position, string name, string type, string rarity)
+    public Item(Vector2 position, string name, string type, string rarity)
     {
-        this.item = item;
         this.ItemPosition = position;
         LoadContent();
         Name = name;
@@ -72,13 +66,13 @@ public class Item
     }
     public virtual void LoadContent(){ // Load item sprite and postition at characters hand area 
         // Default sprite load for item is fist
-        ItemSprite = item.Content.Load<Texture2D>("Fist");
+        ItemSprite = Globals.Content.Load<Texture2D>("Fist");
     }
 
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public virtual void Draw(GameTime gameTime)
     {
         
-        spriteBatch.Draw(
+        Globals._spriteBatch.Draw(
             ItemSprite,
             ItemPosition,
             null,

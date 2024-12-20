@@ -1,24 +1,14 @@
 ﻿namespace New_AWS_Project;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System;
 
 public class Player
 {
-    private Game1 player;
     private Texture2D playerTexture;
     private Vector2 playerPosition;
-	private float moveSpeed = 4.0f;
+	private int moveSpeed = 200;
 	private Item[] inventory = new Item[5];
 	private int lastSlot = 0;
 	private int currentSlot = 0;
 	private SpriteEffects spriteEffect = SpriteEffects.None;
-	private KeyboardState previousState = Keyboard.GetState();
-
-	private int screenWidth;
-	private int screenHeight;
-
 	private Texture2D inventorySprite;
 	private Vector2 inventoryPosition;
 	private Vector2[] inventorySlots = new Vector2[4];
@@ -32,15 +22,10 @@ public class Player
             return new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width, playerTexture.Height);
         }
     }
-    public Player(Game1 player, Vector2 position)
+    public Player(Vector2 position)
     {
-        this.player = player;
         this.playerPosition = position;
-		
-		
-		screenWidth = player.GraphicsDevice.Viewport.Width;
-		screenHeight = player.GraphicsDevice.Viewport.Height;
-		inventoryPosition = new Vector2(screenWidth-75, screenHeight-29);
+		inventoryPosition = new Vector2(Globals.screenWidth-75, Globals.screenHeight-29);
 
 		inventorySlots[0] = new Vector2(inventoryPosition.X + 12, inventoryPosition.Y + 14);
 		for(int i = 1; i < 4; i++)
@@ -54,33 +39,31 @@ public class Player
 	// Generation of player
     public void LoadContent()
     {
-        playerTexture = player.Content.Load<Texture2D>("priest1_v1_1");
-		inventorySprite = player.Content.Load<Texture2D>("Sample-InventorySlotsSet_Single");
+        playerTexture = Globals.Content.Load<Texture2D>("priest1_v1_1");
+		inventorySprite = Globals.Content.Load<Texture2D>("Sample-InventorySlotsSet_Single");
     }
     
-    public void Update(GameTime gameTime, Matrix transformMatrix)
+    public void Update(GameTime gameTime)
     {
-		KeyboardState currentKeyboardState = Keyboard.GetState();
-		mousePosition(Matrix.Invert(transformMatrix));
-    	playerMovement(currentKeyboardState);
-		Inventory(currentKeyboardState);
+    	playerMovement();
+		Inventory();
+
 		
-		ClampToScreen();
 	    if (inventory[currentSlot] != null)
 	    { 
 		    inventory[currentSlot].Update(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	    }
     }
 
-	public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+	public void Draw(GameTime gameTime)
     {
-        spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
-		spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
+        Globals._spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
+		Globals._spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
 		for(int i = 0; i < 4; i++)
 		{
 			if(inventorySprites[i] != null)
 			{
-				spriteBatch.Draw(inventorySprites[i], inventorySlots[i], null, Color.White, 0f, Vector2.Zero, new Vector2(0.2f,0.2f), SpriteEffects.None, 0f);
+				Globals._spriteBatch.Draw(inventorySprites[i], inventorySlots[i], null, Color.White, 0f, Vector2.Zero, new Vector2(0.2f,0.2f), SpriteEffects.None, 0f);
 			}
 			
 		}
@@ -88,38 +71,61 @@ public class Player
 	
     
 	// Player Movement
-	private void playerMovement(KeyboardState currentKey)
+	private void playerMovement()
 	{
 		// Movement checking
-		if (currentKey.IsKeyDown(Keys.W))
+		if (InputManager.Direction != Vector2.Zero)
+		{
+			var dir = Vector2.Normalize(InputManager.Direction);
+
+			playerPosition += dir * moveSpeed * Globals.totalSeconds;
+
+		}
+
+		// Screen boundaries
+		if (playerPosition.X < 0)
         {
-            playerPosition.Y -= moveSpeed;
+            playerPosition.X = 0;
         }
-        if (currentKey.IsKeyDown(Keys.S))
-        {
-            playerPosition.Y += moveSpeed;
-        }
-        if (currentKey.IsKeyDown(Keys.A))
-        {
-            playerPosition.X -= moveSpeed;
-        }
-        if (currentKey.IsKeyDown(Keys.D))
-        {
-            playerPosition.X += moveSpeed;
-        }
+		if (playerPosition.Y < 0)
+		{
+			playerPosition.Y = 0;
+		}
+		if (playerPosition.X > Globals.screenWidth - playerTexture.Width)
+		{
+			playerPosition.X = Globals.screenWidth - playerTexture.Width;
+		}
+		if (playerPosition.Y > Globals.screenHeight - playerTexture.Height)
+		{
+			playerPosition.Y = Globals.screenHeight - playerTexture.Height;
+		}
+
+		// Player Sprite flipping and Item rotation based on mouse
+		if(playerPosition.X + playerTexture.Width/2f < InputManager.MousePosition.X)
+		{
+			spriteEffect = SpriteEffects.None;
+		}
+		else if(playerPosition.X + playerTexture.Width/2f > InputManager.MousePosition.X)
+		{
+			spriteEffect = SpriteEffects.FlipHorizontally;
+		}
+
+		inventory[currentSlot]?.mousePosition(InputManager.MousePosition);
 	}
 	
 
 	
-	private void Inventory(KeyboardState currentKey){
-		if (currentKey.IsKeyDown(Keys.E) && !previousState.IsKeyDown(Keys.E) && inventory[currentSlot] != null)
+	private void Inventory(){
+		
+		if (!InputManager._previousKeyboardState.IsKeyDown(Keys.E) && InputManager._currentKeyboardState.IsKeyDown(Keys.E) && inventory[currentSlot] != null)
 		{
 			drop();
 		}
-		previousState = currentKey;
 
-        if (currentKey.IsKeyDown(Keys.D1))
+		bool swapping = false;
+        if (InputManager._currentKeyboardState.IsKeyDown(Keys.D1))
         {
+			swapping = true;
 	        int oldSlot = currentSlot == 0? -1 : currentSlot;
 	        currentSlot = 0;
 	        if (inventory[currentSlot] != null)
@@ -130,9 +136,11 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
+			swapping = false;
         }
-        if (currentKey.IsKeyDown(Keys.D2))
+        if (InputManager._currentKeyboardState.IsKeyDown(Keys.D2))
         {
+			swapping = true;
 	        int oldSlot = currentSlot != 1? currentSlot:-1;
 	        currentSlot = 1;
 	        if (inventory[currentSlot] != null)
@@ -143,9 +151,11 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
+			swapping = false;
         }
-        if (currentKey.IsKeyDown(Keys.D3))
+        if (InputManager._currentKeyboardState.IsKeyDown(Keys.D3))
         {
+			swapping = true;
 	        int oldSlot = currentSlot != 2? currentSlot:-1;
 	        currentSlot = 2;
 	        if (inventory[currentSlot] != null)
@@ -156,9 +166,11 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
+			swapping = false;
         }
-        if (currentKey.IsKeyDown(Keys.D4))
+        if (InputManager._currentKeyboardState.IsKeyDown(Keys.D4))
         {
+			swapping = true;
 	        int oldSlot = currentSlot != 3? currentSlot:-1;
 	        currentSlot = 3;
 	        if (inventory[currentSlot] != null)
@@ -169,9 +181,11 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
+			swapping = false;
         }
-        if (currentKey.IsKeyDown(Keys.D5))
+        if (InputManager._currentKeyboardState.IsKeyDown(Keys.D5))
         {
+			swapping = true;
 	        int oldSlot = currentSlot != 4? currentSlot:-1;
 	        currentSlot = 4;
 	        if (inventory[currentSlot] != null)
@@ -182,27 +196,9 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
+			swapping = false;
         }
 	}
-
-    private void mousePosition(Matrix transformMatrix)
-    {
-        Vector2 currentMousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-		Vector2 globalMousePosition = Vector2.Transform(currentMousePosition, transformMatrix);
-
-        // The mouse x and y positions are returned relative to the
-        // upper-left corner of the game window
-        if(playerPosition.X + playerTexture.Width/2f < globalMousePosition.X)
-		{
-			spriteEffect = SpriteEffects.None;
-		}
-		else if(playerPosition.X + playerTexture.Width/2f > globalMousePosition.X)
-		{
-			spriteEffect = SpriteEffects.FlipHorizontally;
-		}
-
-		inventory[currentSlot]?.mousePosition(globalMousePosition);
-    }
 
     public void pickUp(Item item)
     {
@@ -212,7 +208,6 @@ public class Player
 		    inventory[lastSlot] = item;
 		    item.pickedUpItem();
 		    lastSlot++;
-
 			
 	    }
     }
@@ -241,21 +236,4 @@ public class Player
 		droppedItem.setPosition(new Vector2(playerPosition.X + 100, playerPosition.Y));
 	    droppedItem.pickedUp = false;
     }
-
-	
-
-	// In your Update method, after movement calculation but before setting final position:
-	private void ClampToScreen()
-	{
-    	// Assuming playerPosition is your Vector2 position
-    	// And playerTexture is your player's texture
-    	float minX = playerTexture.Width / 2f;
-    	float minY = playerTexture.Height / 2f;
-    	float maxX = screenWidth - (playerTexture.Width / 2f);
-    	float maxY = screenHeight - (playerTexture.Height / 2f);
-
-    	playerPosition.X = Math.Clamp(playerPosition.X, minX, maxX);
-    	playerPosition.Y = Math.Clamp(playerPosition.Y, minY, maxY);
-	}
-
 }
