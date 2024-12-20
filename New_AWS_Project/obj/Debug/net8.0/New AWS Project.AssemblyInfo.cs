@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("New AWS Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e85c9dcb8eff5758e28a8aea59d54fbe8e3f5cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1f7c8b7079692fffb0203d738f9b5a75197fff99")]
 [assembly: System.Reflection.AssemblyProductAttribute("New AWS Project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("New AWS Project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

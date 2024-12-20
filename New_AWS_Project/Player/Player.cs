@@ -14,6 +14,7 @@ public class Player
 	private Vector2[] inventorySlots = new Vector2[4];
 	private Texture2D[] inventorySprites = new Texture2D[4];
 
+    
    
     public Rectangle PositionRectangle
     {
@@ -25,13 +26,6 @@ public class Player
     public Player(Vector2 position)
     {
         this.playerPosition = position;
-		inventoryPosition = new Vector2(Globals.screenWidth-75, Globals.screenHeight-29);
-
-		inventorySlots[0] = new Vector2(inventoryPosition.X + 12, inventoryPosition.Y + 14);
-		for(int i = 1; i < 4; i++)
-		{
-			inventorySlots[i] = new Vector2(inventorySlots[i-1].X + 17, inventorySlots[i-1].Y);
-		}
         LoadContent();
     }
     
@@ -47,7 +41,17 @@ public class Player
     {
     	playerMovement();
 		Inventory();
+		
+		if(inventoryPosition.X == 0)
+		{
+			inventoryPosition = new Vector2(Globals.screenWidth - 75, (int)(Globals.screenHeight) - 29);
 
+			inventorySlots[0] = new Vector2(inventoryPosition.X + 5, inventoryPosition.Y + 7);
+			for(int i = 1; i < 4; i++)
+			{
+				inventorySlots[i] = new Vector2(inventorySlots[i-1].X + 17, inventorySlots[i-1].Y);
+			}
+		}
 		
 	    if (inventory[currentSlot] != null)
 	    { 
@@ -58,12 +62,24 @@ public class Player
 	public void Draw(GameTime gameTime)
     {
         Globals._spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
-		Globals._spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
+        Globals._spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
+		
 		for(int i = 0; i < 4; i++)
 		{
 			if(inventorySprites[i] != null)
 			{
-				Globals._spriteBatch.Draw(inventorySprites[i], inventorySlots[i], null, Color.White, 0f, Vector2.Zero, new Vector2(0.2f,0.2f), SpriteEffects.None, 0f);
+				Vector2 scale = new Vector2(15/inventorySprites[i].Width, 15/inventorySprites[i].Height);
+				Globals._spriteBatch.Draw(
+		            inventorySprites[i],
+		            inventorySlots[i],
+		            null,
+		            Color.White ,
+		            45,
+		            Vector2.Zero,
+		            0.67f,
+		            spriteEffect,
+		            0f
+				);
 			}
 			
 		}

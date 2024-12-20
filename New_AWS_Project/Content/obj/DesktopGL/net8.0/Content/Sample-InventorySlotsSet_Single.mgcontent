@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/Sample-InventorySlotsSet_Single.png</SourceFile>
-  <SourceTime>2024-12-19T15:57:03.6983912-08:00</SourceTime>
-  <DestFile>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/bin/DesktopGL/Content/Sample-InventorySlotsSet_Single.xnb</DestFile>
-  <DestTime>2024-12-19T15:57:40.6272799-08:00</DestTime>
+  <SourceFile>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/Sample-InventorySlotsSet_Single.png</SourceFile>
+  <SourceTime>2024-12-19T12:14:58.639462-08:00</SourceTime>
+  <DestFile>C:/Users/Yaaska Pandit/RiderProjects/HackathonProject/New_AWS_Project/Content/bin/DesktopGL/Content/Sample-InventorySlotsSet_Single.xnb</DestFile>
+  <DestTime>2024-12-20T11:24:06.1492327-08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-16T10:05:56-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -7,13 +7,15 @@ public class Game1 : Game
     private GameManager GameManager;
 
     //desired Game resolution
-    private int _resolutionWidth = 640;
-    private int _resolutionHeight = 360;
+    public int _resolutionWidth = 640;
+    public int _resolutionHeight = 360;
+
     
     //resolution we render at
     private int _virtualWidth = 640;
     private int _virtualHeight = 360;
     private Viewport _viewport;
+
     // Flags
     private bool _isResizing;
 
@@ -45,6 +47,7 @@ public class Game1 : Game
         // TODO: Add your initialization logic here
         Globals.Content = Content;
         GameManager = new GameManager();
+
         UpdateScreenScaleMatrix();
         base.Initialize();
 		
@@ -115,6 +118,9 @@ public class Game1 : Game
             MinDepth = 0,
             MaxDepth = 1
         };
+
+		Globals.screenWidth = _virtualWidth;
+		Globals.screenHeight = _virtualHeight;
         
     }
 }
