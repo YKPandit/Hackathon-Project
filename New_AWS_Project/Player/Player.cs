@@ -13,7 +13,11 @@ public class Player
 	private Vector2 inventoryPosition;
 	private Vector2[] inventorySlots = new Vector2[4];
 	private Texture2D[] inventorySprites = new Texture2D[4];
-
+	private int playerHealth = 100;
+	public float healthScale = 1.0f;
+	private Texture2D healthBar;
+	private Vector2 healthBarPosition = Vector2.Zero;
+	private Texture2D healthBarUI;
     
    
     public Rectangle PositionRectangle
@@ -35,6 +39,8 @@ public class Player
     {
         playerTexture = Globals.Content.Load<Texture2D>("priest1_v1_1");
 		inventorySprite = Globals.Content.Load<Texture2D>("Sample-InventorySlotsSet_Single");
+		healthBar = Globals.Content.Load<Texture2D>("health");
+		healthBarUI = Globals.Content.Load<Texture2D>("health ui");
     }
     
     public void Update(GameTime gameTime)
@@ -63,6 +69,8 @@ public class Player
     {
         Globals._spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
         Globals._spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
+        Globals._spriteBatch.Draw(healthBarUI, healthBarPosition, Color.White);
+        Globals._spriteBatch.Draw(healthBar, new Vector2(25, 4.375f), null, Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
 		
 		for(int i = 0; i < 4; i++)
 		{
