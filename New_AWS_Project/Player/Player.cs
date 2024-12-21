@@ -14,7 +14,8 @@ public class Player
 	private Vector2[] inventorySlots = new Vector2[4];
 	private Texture2D[] inventorySprites = new Texture2D[4];
 	private int playerHealth = 100;
-	public float healthScale = 1.0f;
+	private float healthScale = 1.0f;
+	private Vector2 healthScaleVector = new Vector2(0.75f, 0.75f);
 	private Texture2D healthBar;
 	private Vector2 healthBarPosition = Vector2.Zero;
 	private Texture2D healthBarUI;
@@ -63,6 +64,7 @@ public class Player
 	    { 
 		    inventory[currentSlot].Update(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	    }
+	    playerDamage(1);
     }
 
 	public void Draw(GameTime gameTime)
@@ -70,7 +72,7 @@ public class Player
         Globals._spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
         Globals._spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
         Globals._spriteBatch.Draw(healthBarUI, healthBarPosition, Color.White);
-        Globals._spriteBatch.Draw(healthBar, new Vector2(25, 4.375f), null, Color.White, 0f, Vector2.Zero, 0.75f, SpriteEffects.None, 0f);
+        Globals._spriteBatch.Draw(healthBar, new Vector2(25, 4.375f), null, Color.White, 0f, Vector2.Zero, healthScaleVector, SpriteEffects.None, 0f);
 		
 		for(int i = 0; i < 4; i++)
 		{
@@ -260,5 +262,12 @@ public class Player
 		
 		droppedItem.setPosition(new Vector2(playerPosition.X + 100, playerPosition.Y));
 	    droppedItem.pickedUp = false;
+    }
+
+    public void playerDamage(int damage)
+    {
+	    playerHealth -= damage;
+	    healthScale -= damage/100f;
+	    healthScaleVector = new Vector2(healthScale, 1.0f);
     }
 }
