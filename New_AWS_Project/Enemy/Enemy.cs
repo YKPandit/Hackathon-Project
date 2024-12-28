@@ -3,10 +3,11 @@
 public class Enemy
 {
     private int health;
-    private int dmg;
+    public int dmg;
     private Texture2D sprite;
     private Vector2 position;
     private int moveSpeed = 2;
+    public int cooldown = 60;
 
 
     public Enemy(Vector2 pos)

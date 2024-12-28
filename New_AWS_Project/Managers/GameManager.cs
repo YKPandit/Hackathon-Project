@@ -37,6 +37,15 @@ public class GameManager{
         if (Vector2.Distance(playerPos, enemy.getPosition()) <= 100)
         {
             enemy.move(playerPos);
+            if (Vector2.Distance(playerPos, enemy.getPosition()) <= 25 && enemy.cooldown >= 60)
+            {
+                player.playerDamage(enemy.dmg);
+                enemy.cooldown = 0;
+            }
+            else
+            {
+                enemy.cooldown++;
+            }
         }
         
         player.Update();

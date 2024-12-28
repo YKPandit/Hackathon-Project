@@ -18,7 +18,7 @@ public class Player
 
 	// Health
 	private int playerHealth = 100;
-	private float healthScale = 1.0f;
+	private float healthScale = 0.75f;
 	private Vector2 healthScaleVector = new Vector2(0.75f, 0.75f);
 	private Texture2D healthBar;
 	private Vector2 healthBarPosition = Vector2.Zero;
@@ -251,6 +251,6 @@ public class Player
     {
 	    playerHealth -= damage;
 	    healthScale -= damage/100f;
-	    healthScaleVector = new Vector2(healthScale, 1.0f);
+	    healthScaleVector = new Vector2(healthScale, healthScaleVector.Y);
     }
 }
