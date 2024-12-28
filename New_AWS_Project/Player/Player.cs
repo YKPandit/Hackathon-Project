@@ -101,7 +101,11 @@ public class Player
 			
 		}
     }
-	
+
+	public Vector2 getPosition()
+	{
+		return playerPosition;
+	}
     
 	// Player Movement
 	private void playerMovement()

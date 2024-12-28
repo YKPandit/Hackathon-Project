@@ -4,16 +4,18 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/3bbc0d500f6805b6e086d8f51ccd1870(1).png</File>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/Arrow.png</File>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/Bow.png</File>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/Fist.png</File>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/health ui.png</File>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/health.png</File>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/priest1_v1_1.png</File>
-    <File>/home/ashton/Documents/Hackathon-Project/New_AWS_Project/Content/Sample-InventorySlotsSet_Single.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/3bbc0d500f6805b6e086d8f51ccd1870(1).png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/Arrow.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/Bow.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/enemy.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/Fist.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/health ui.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/health.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/priest1_v1_1.png</File>
+    <File>C:/Users/Yaaska Pandit/RiderProjects/Hackathon_Project_Retrieve/New_AWS_Project/Content/Sample-InventorySlotsSet_Single.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

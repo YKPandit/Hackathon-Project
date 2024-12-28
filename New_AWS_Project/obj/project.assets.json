@@ -238,25 +238,24 @@
     ]
   },
   "packageFolders": {
-    "/home/ashton/.nuget/packages/": {}
+    "C:\\Users\\Yaaska Pandit\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/New AWS Project.csproj",
+      "projectUniqueName": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project_Retrieve\\New_AWS_Project\\New AWS Project.csproj",
       "projectName": "New AWS Project",
-      "projectPath": "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/New AWS Project.csproj",
-      "packagesPath": "/home/ashton/.nuget/packages/",
-      "outputPath": "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/obj/",
+      "projectPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project_Retrieve\\New_AWS_Project\\New AWS Project.csproj",
+      "packagesPath": "C:\\Users\\Yaaska Pandit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\Hackathon_Project_Retrieve\\New_AWS_Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ashton/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Yaaska Pandit\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -307,11 +306,15 @@
             "version": "[8.0.11, 8.0.11]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "name": "Microsoft.NETCore.App.Host.win-x64",
             "version": "[8.0.11, 8.0.11]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.11, 8.0.11]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
             "version": "[8.0.11, 8.0.11]"
           }
         ],
@@ -320,7 +323,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
