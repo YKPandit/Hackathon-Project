@@ -2,15 +2,24 @@
 namespace New_AWS_Project;
 public class Bow : Item{
     public Bow(Vector2 position, string name, string type, string rarity)
-    : base(position, name, type, rarity){LoadContent();}
+    : base(position, name, type, rarity){
+        LoadContent();
+        cooldown = 1.0f;
+    }
 
     public override void LoadContent(){ 
         // Load sword sprite
         base.ItemSprite = Globals.Content.Load<Texture2D>("Bow");
     }
 
-    public override void Attack()
+    public override void Use()
     {
-        // Attack with bow, creates projectile
+        if (cooldownLeft > 0) return;
+        
+        cooldownLeft = cooldown;
+
+        // Create a new projectile
+        PlayerProjectileManager.AddProjectile("Arrow", new Vector2(ItemPosition.X, ItemPosition.Y), 600, rotation, 2);
+
     }
 }

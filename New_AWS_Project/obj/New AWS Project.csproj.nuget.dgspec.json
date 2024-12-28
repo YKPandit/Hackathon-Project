@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Yaaska Pandit\\RiderProjects\\HackathonProject\\New_AWS_Project\\New AWS Project.csproj": {}
+    "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/New AWS Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Yaaska Pandit\\RiderProjects\\HackathonProject\\New_AWS_Project\\New AWS Project.csproj": {
+    "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/New AWS Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Yaaska Pandit\\RiderProjects\\HackathonProject\\New_AWS_Project\\New AWS Project.csproj",
+        "projectUniqueName": "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/New AWS Project.csproj",
         "projectName": "New AWS Project",
-        "projectPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\HackathonProject\\New_AWS_Project\\New AWS Project.csproj",
-        "packagesPath": "C:\\Users\\Yaaska Pandit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Yaaska Pandit\\RiderProjects\\HackathonProject\\New_AWS_Project\\obj\\",
+        "projectPath": "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/New AWS Project.csproj",
+        "packagesPath": "/home/ashton/.nuget/packages/",
+        "outputPath": "/home/ashton/Documents/Hackathon-Project/New_AWS_Project/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Yaaska Pandit\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/ashton/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -70,15 +71,11 @@
               "version": "[8.0.11, 8.0.11]"
             },
             {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
               "version": "[8.0.11, 8.0.11]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.11, 8.0.11]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
               "version": "[8.0.11, 8.0.11]"
             }
           ],
@@ -87,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

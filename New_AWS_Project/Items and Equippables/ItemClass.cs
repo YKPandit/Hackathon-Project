@@ -13,10 +13,10 @@ public class Item
     public string Name { get; set; }
     public string Type { get; set; }
     public string Rarity { get; set; }
-    public bool Attacking { get; set; }
-    public bool Using { get; set; }
     public float opacity = 1.0f;
     public bool pickedUp = false;
+    protected float cooldown;
+    protected float cooldownLeft = 0;
 
     public SpriteEffects spriteEffect = SpriteEffects.None;
 
@@ -27,8 +27,7 @@ public class Item
         Name = name;
         Type = type;
         Rarity = rarity;
-        Attacking = false;
-        Using = false;
+        cooldown = 0.5f;
     }
 
     public Texture2D getTexture()
@@ -69,7 +68,7 @@ public class Item
         ItemSprite = Globals.Content.Load<Texture2D>("Fist");
     }
 
-    public virtual void Draw(GameTime gameTime)
+    public void Draw()
     {
         
         Globals._spriteBatch.Draw(
@@ -85,15 +84,8 @@ public class Item
         );
     }
 
-
-    public virtual void Attack()
-    {
-        Attacking = true;
-    }
-
     public virtual void Use()
     {
-        Using = true;
     }
 
     public void setPosition(Vector2 newPos)
@@ -130,6 +122,15 @@ public class Item
     public void Update(Vector2 pos){
 		ItemPosition = pos;
         ItemOrigin = new Vector2(ItemSprite.Width, ItemSprite.Height / 2f);
+
+        if (cooldownLeft > 0)
+        {
+            cooldownLeft -= Globals.totalSeconds;
+        }
+        
+        if (InputManager.LeftDown){
+            Use();
+        }
 	}
 }
 

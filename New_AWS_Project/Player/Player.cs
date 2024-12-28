@@ -5,20 +5,25 @@ public class Player
     private Texture2D playerTexture;
     private Vector2 playerPosition;
 	private int moveSpeed = 200;
-	private Item[] inventory = new Item[5];
-	private int lastSlot = 0;
-	private int currentSlot = 0;
 	private SpriteEffects spriteEffect = SpriteEffects.None;
+
+	// Inventory
+	private Item[] inventory = new Item[5];
+	private int currentSlot = 0;
 	private Texture2D inventorySprite;
 	private Vector2 inventoryPosition;
 	private Vector2[] inventorySlots = new Vector2[4];
 	private Texture2D[] inventorySprites = new Texture2D[4];
+	private bool inventoryFull = false;
+
+	// Health
 	private int playerHealth = 100;
 	private float healthScale = 1.0f;
 	private Vector2 healthScaleVector = new Vector2(0.75f, 0.75f);
 	private Texture2D healthBar;
 	private Vector2 healthBarPosition = Vector2.Zero;
 	private Texture2D healthBarUI;
+
     
    
     public Rectangle PositionRectangle
@@ -44,11 +49,12 @@ public class Player
 		healthBarUI = Globals.Content.Load<Texture2D>("health ui");
     }
     
-    public void Update(GameTime gameTime)
+    public void Update()
     {
     	playerMovement();
 		Inventory();
 		
+		// This shit is ass, gotta fix it
 		if(inventoryPosition.X == 0)
 		{
 			inventoryPosition = new Vector2(Globals.screenWidth - 75, (int)(Globals.screenHeight) - 29);
@@ -64,10 +70,11 @@ public class Player
 	    { 
 		    inventory[currentSlot].Update(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
 	    }
-	    playerDamage(1);
+		
+	    // playerDamage(1);
     }
 
-	public void Draw(GameTime gameTime)
+	public void Draw()
     {
         Globals._spriteBatch.Draw(playerTexture, playerPosition, null, Color.White, 0f, Vector2.Zero, 1f, spriteEffect, 0f);
         Globals._spriteBatch.Draw(inventorySprite, inventoryPosition, Color.White);
@@ -104,28 +111,10 @@ public class Player
 		{
 			var dir = Vector2.Normalize(InputManager.Direction);
 
-			playerPosition += dir * moveSpeed * Globals.totalSeconds;
+			playerPosition = new(MathHelper.Clamp (playerPosition.X + (dir.X * moveSpeed * Globals.totalSeconds), 0, Globals._resolutionWidth - playerTexture.Width),
+								MathHelper.Clamp (playerPosition.Y + (dir.Y * moveSpeed * Globals.totalSeconds), 0, Globals._resolutionHeight - playerTexture.Height));
 
 		}
-
-		// Screen boundaries
-		if (playerPosition.X < 0)
-        {
-            playerPosition.X = 0;
-        }
-		if (playerPosition.Y < 0)
-		{
-			playerPosition.Y = 0;
-		}
-		if (playerPosition.X > Globals.screenWidth - playerTexture.Width)
-		{
-			playerPosition.X = Globals.screenWidth - playerTexture.Width;
-		}
-		if (playerPosition.Y > Globals.screenHeight - playerTexture.Height)
-		{
-			playerPosition.Y = Globals.screenHeight - playerTexture.Height;
-		}
-
 		// Player Sprite flipping and Item rotation based on mouse
 		if(playerPosition.X + playerTexture.Width/2f < InputManager.MousePosition.X)
 		{
@@ -148,10 +137,8 @@ public class Player
 			drop();
 		}
 
-		bool swapping = false;
         if (InputManager._currentKeyboardState.IsKeyDown(Keys.D1))
         {
-			swapping = true;
 	        int oldSlot = currentSlot == 0? -1 : currentSlot;
 	        currentSlot = 0;
 	        if (inventory[currentSlot] != null)
@@ -162,11 +149,11 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
-			swapping = false;
+
         }
         if (InputManager._currentKeyboardState.IsKeyDown(Keys.D2))
         {
-			swapping = true;
+
 	        int oldSlot = currentSlot != 1? currentSlot:-1;
 	        currentSlot = 1;
 	        if (inventory[currentSlot] != null)
@@ -177,11 +164,10 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
-			swapping = false;
         }
         if (InputManager._currentKeyboardState.IsKeyDown(Keys.D3))
         {
-			swapping = true;
+
 	        int oldSlot = currentSlot != 2? currentSlot:-1;
 	        currentSlot = 2;
 	        if (inventory[currentSlot] != null)
@@ -192,11 +178,10 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
-			swapping = false;
         }
         if (InputManager._currentKeyboardState.IsKeyDown(Keys.D4))
         {
-			swapping = true;
+
 	        int oldSlot = currentSlot != 3? currentSlot:-1;
 	        currentSlot = 3;
 	        if (inventory[currentSlot] != null)
@@ -207,11 +192,11 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
-			swapping = false;
+
         }
         if (InputManager._currentKeyboardState.IsKeyDown(Keys.D5))
         {
-			swapping = true;
+
 	        int oldSlot = currentSlot != 4? currentSlot:-1;
 	        currentSlot = 4;
 	        if (inventory[currentSlot] != null)
@@ -222,19 +207,27 @@ public class Player
 	        {
 		        inventory[oldSlot].pickedUpItem();
 	        }
-			swapping = false;
+
         }
 	}
 
     public void pickUp(Item item)
     {
-	    if (lastSlot < 4 && Keyboard.GetState().IsKeyDown(Keys.Q))
+	    if (!inventoryFull && Keyboard.GetState().IsKeyDown(Keys.Q))
 	    {
-			inventorySprites[lastSlot] = item.getTexture();
-		    inventory[lastSlot] = item;
+			int slot = 0;
+			while (inventory[slot] != null)
+			{
+				slot++;
+				if (slot == 4)
+				{
+					inventoryFull = true;
+					break;
+				}
+			}
+			inventorySprites[slot] = item.getTexture();
+		    inventory[slot] = item;
 		    item.pickedUpItem();
-		    lastSlot++;
-			
 	    }
     }
 
@@ -243,22 +236,8 @@ public class Player
 	    Item droppedItem = inventory[currentSlot];
 	    inventory[currentSlot] = null;
 	    inventorySprites[currentSlot] = null;
-	    
-	    
-	    if (currentSlot < 5 && inventory[currentSlot + 1] != null)
-	    {
-		    currentSlot += 1;
-	    }
-	    else if (currentSlot > 0 && inventory[currentSlot - 1] != null)
-	    {
-		    currentSlot -= 1;
-			lastSlot--;
-	    }
-	    else
-	    {
-		    currentSlot = 0;
-			lastSlot--;
-	    }
+
+		inventoryFull = false;
 		
 		droppedItem.setPosition(new Vector2(playerPosition.X + 100, playerPosition.Y));
 	    droppedItem.pickedUp = false;

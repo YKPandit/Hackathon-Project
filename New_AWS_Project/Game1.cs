@@ -6,10 +6,6 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager GameManager;
 
-    //desired Game resolution
-    public int _resolutionWidth = 640;
-    public int _resolutionHeight = 360;
-
     
     //resolution we render at
     private int _virtualWidth = 640;
@@ -22,8 +18,8 @@ public class Game1 : Game
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
-        _graphics.PreferredBackBufferWidth = _resolutionWidth;
-		_graphics.PreferredBackBufferHeight = _resolutionHeight;
+        _graphics.PreferredBackBufferWidth = Globals._resolutionWidth;
+		_graphics.PreferredBackBufferHeight = Globals._resolutionHeight;
 		_graphics.ApplyChanges();
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
@@ -69,7 +65,7 @@ public class Game1 : Game
 
         // TODO: Add your update logic here
         Globals.Update(gameTime);
-        GameManager.Update(gameTime);
+        GameManager.Update();
         
         base.Update(gameTime);
 
@@ -83,7 +79,7 @@ public class Game1 : Game
         GraphicsDevice.Viewport = _viewport;
 
 		Globals._spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Globals._screenScaleMatrix);
-        GameManager.Draw(gameTime);
+        GameManager.Draw();
     	Globals._spriteBatch.End();
         // TODO: Add your drawing code here
         base.Draw(gameTime);
@@ -96,19 +92,19 @@ public class Game1 : Game
         float screenHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
 
         // Calculate virtual resolution based on current screen width and height
-        if (screenWidth/ _resolutionWidth > screenHeight / _resolutionHeight)
+        if (screenWidth/ Globals._resolutionWidth > screenHeight / Globals._resolutionHeight)
         {
-            float aspect = screenHeight / _resolutionHeight;
-            _virtualWidth = (int)(aspect * _resolutionWidth);
+            float aspect = screenHeight / Globals._resolutionHeight;
+            _virtualWidth = (int)(aspect * Globals._resolutionWidth);
             _virtualHeight = (int)screenHeight;
         }
         else {
-            float aspect = screenWidth / _resolutionWidth;
+            float aspect = screenWidth / Globals._resolutionWidth;
             _virtualWidth = (int)screenWidth;
-            _virtualHeight = (int)(aspect * _resolutionHeight);
+            _virtualHeight = (int)(aspect * Globals._resolutionHeight);
         }
 
-        Globals._screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)_resolutionWidth, _virtualHeight / (float)_resolutionHeight, 1.0f);
+        Globals._screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)Globals._resolutionWidth, _virtualHeight / (float)Globals._resolutionHeight, 1.0f);
 
         _viewport = new Viewport{
             X = (int)(screenWidth / 2 - _virtualWidth / 2),

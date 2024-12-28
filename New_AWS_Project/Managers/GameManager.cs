@@ -14,7 +14,7 @@ public class GameManager{
         bow = new Bow(new Vector2(300.0f, 100.0f), "Bow", "Ranged", "Common");
     }
 
-    public void Update(GameTime gameTime){
+    public void Update(){
         InputManager.Update();
         if (player.PositionRectangle.Intersects(item.ItemPositionRectangle) && !item.pickedUp)
         {
@@ -30,14 +30,16 @@ public class GameManager{
         {
 	        player.pickUp(bow);
         }
-        player.Update(gameTime);
+        player.Update();
+        PlayerProjectileManager.Update();
     }
 
-    public void Draw(GameTime gameTime){
-        player.Draw(gameTime);
-        item.Draw(gameTime);
-        sword.Draw(gameTime);
-        bow.Draw(gameTime);
+    public void Draw(){
+        player.Draw();
+        item.Draw();
+        sword.Draw();
+        bow.Draw();
+        PlayerProjectileManager.Draw();
     }
 
 }
