@@ -11,9 +11,10 @@ public class Projectile
     public Vector2 Direction { get; set; }
     public int Speed { get; set; }
     public float Rotation { get; set; }
-    public float Lifespan {get; set;} 
+    public float Lifespan {get; set;}
+    private int Damage;
 
-    public Projectile(string sprite, Vector2 position, int speed, float rotation, float lifespan)
+    public Projectile(string sprite, Vector2 position, int speed, float rotation, float lifespan, int damage)
     {
         Position = position;
         Speed = speed;
@@ -22,6 +23,7 @@ public class Projectile
         Direction = new Vector2(-(float)Math.Cos(rotation), -(float)Math.Sin(rotation));
         Texture = Globals.Content.Load<Texture2D>(sprite);
         Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+        Damage = damage;
     }
 
         public virtual Rectangle ItemPositionRectangle // Create hitbox for item
@@ -56,24 +58,33 @@ public class Projectile
 
     public void Draw()
     {
-        
-        Globals._spriteBatch.Draw(
-            Texture,
-            Position,
-            null,
-            Color.White, 
-            Rotation,
-            Origin,
-            1.0f, // scale
-            SpriteEffects.None,
-            0f
-        );
+
+        if (Lifespan >= 0)
+        {
+            Globals._spriteBatch.Draw(
+                Texture,
+                Position,
+                null,
+                Color.White, 
+                Rotation,
+                Origin,
+                1.0f, // scale
+                SpriteEffects.None,
+                0f
+            );
+        }
     }
 
 
-    public void Update()
+    public void Update(Enemy enemy)
     {
         Position += Direction * Speed * Globals.totalSeconds;
-        Lifespan -= Globals.totalSeconds;
+        Lifespan -= 1/60.0f;
+
+        if (enemy.PositionRectangle.Intersects(this.ItemPositionRectangle))
+        {
+            enemy.enemyDamage(Damage);
+            Lifespan = 0;
+        }
     }
 }

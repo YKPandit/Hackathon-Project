@@ -34,7 +34,7 @@ public class GameManager{
         }
         
         Vector2 playerPos = player.getPosition();
-        if (Vector2.Distance(playerPos, enemy.getPosition()) <= 100)
+        if (!enemy.dead && Vector2.Distance(playerPos, enemy.getPosition()) <= 100)
         {
             enemy.move(playerPos);
             if (Vector2.Distance(playerPos, enemy.getPosition()) <= 25 && enemy.cooldown >= 60)
@@ -48,8 +48,10 @@ public class GameManager{
             }
         }
         
+        
         player.Update();
-        PlayerProjectileManager.Update();
+        PlayerProjectileManager.Update(enemy);
+        enemy.Update();
     }
 
     public void Draw(){

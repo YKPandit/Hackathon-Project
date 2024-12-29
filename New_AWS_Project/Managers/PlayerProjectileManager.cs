@@ -6,13 +6,13 @@ public static class PlayerProjectileManager
 {
     private static List<Projectile> _projectiles {get;} = new();
 
-    public static void AddProjectile(string sprite, Vector2 position, int speed, float rotation, float lifespan){
-        _projectiles.Add(new Projectile(sprite, position, speed, rotation, lifespan));
+    public static void AddProjectile(string sprite, Vector2 position, int speed, float rotation, float lifespan, int damage){
+        _projectiles.Add(new Projectile(sprite, position, speed, rotation, lifespan, damage));
     }
 
-    public static void Update(){
+    public static void Update(Enemy enemy){
         foreach (var projectile in _projectiles){
-            projectile.Update();
+            projectile.Update(enemy);
         }
         _projectiles.RemoveAll(projectile => projectile.Lifespan <= 0);
 

@@ -17,9 +17,9 @@ public class Bow : Item{
         if (cooldownLeft > 0) return;
         
         cooldownLeft = cooldown;
-
+        int damage = 5;
         // Create a new projectile
-        PlayerProjectileManager.AddProjectile("Arrow", new Vector2(ItemPosition.X, ItemPosition.Y), 600, rotation, 2);
+        PlayerProjectileManager.AddProjectile("Arrow", new Vector2(ItemPosition.X, ItemPosition.Y), 600, rotation, 2, damage);
 
     }
 }

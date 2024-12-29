@@ -8,7 +8,16 @@ public class Enemy
     private Vector2 position;
     private int moveSpeed = 2;
     public int cooldown = 60;
+    public bool dead = false;
 
+    
+    public Rectangle PositionRectangle
+    {
+        get
+        {
+            return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+        }
+    }
 
     public Enemy(Vector2 pos)
     {
@@ -26,12 +35,18 @@ public class Enemy
 
     public void Update()
     {
-        
+        if (health <= 0)
+        {
+            dead = true;
+        }
     }
 
     public void Draw()
     {
-        Globals._spriteBatch.Draw(sprite, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+        if (!dead)
+        {
+            Globals._spriteBatch.Draw(sprite, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+        }
     }
 
     public Vector2 getPosition()
@@ -43,5 +58,10 @@ public class Enemy
     {
         position.X += moveSpeed*((playerPos.X - position.X)/60);
         position.Y += moveSpeed*((playerPos.Y - position.Y)/60);
+    }
+    
+    public void enemyDamage(int damage)
+    {
+        health -= damage;
     }
 }
