@@ -12,7 +12,7 @@ public class Projectile
     public int Speed { get; set; }
     public float Rotation { get; set; }
     public float Lifespan {get; set;}
-    private int Damage;
+    public int Damage;
 
     public Projectile(string sprite, Vector2 position, int speed, float rotation, float lifespan, int damage)
     {
@@ -58,33 +58,25 @@ public class Projectile
 
     public void Draw()
     {
-
-        if (Lifespan >= 0)
-        {
-            Globals._spriteBatch.Draw(
-                Texture,
-                Position,
-                null,
-                Color.White, 
-                Rotation,
-                Origin,
-                1.0f, // scale
-                SpriteEffects.None,
-                0f
-            );
-        }
+        
+        Globals._spriteBatch.Draw(
+            Texture,
+            Position,
+            null,
+            Color.White, 
+            Rotation,
+            Origin,
+            1.0f, // scale
+            SpriteEffects.None,
+            0f
+        );
     }
 
 
     public void Update(Enemy enemy)
     {
         Position += Direction * Speed * Globals.totalSeconds;
-        Lifespan -= 1/60.0f;
+        Lifespan -= Globals.totalSeconds;
 
-        if (enemy.PositionRectangle.Intersects(this.ItemPositionRectangle))
-        {
-            enemy.enemyDamage(Damage);
-            Lifespan = 0;
-        }
     }
 }

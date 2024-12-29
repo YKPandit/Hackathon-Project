@@ -84,7 +84,7 @@ public class Item
         );
     }
 
-    public virtual void Use()
+    public virtual void Use(Player player)
     {
     }
 
@@ -119,7 +119,7 @@ public class Item
         }
     }
 
-    public void Update(Vector2 pos){
+    public void Update(Vector2 pos, Player player){
 		ItemPosition = pos;
         ItemOrigin = new Vector2(ItemSprite.Width, ItemSprite.Height / 2f);
 
@@ -129,7 +129,7 @@ public class Item
         }
         
         if (InputManager.LeftDown){
-            Use();
+            Use(player);
         }
 	}
 }

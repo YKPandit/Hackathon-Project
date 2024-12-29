@@ -8,8 +8,8 @@ public class Player
 	private SpriteEffects spriteEffect = SpriteEffects.None;
 
 	// Inventory
-	private Item[] inventory = new Item[5];
-	private int currentSlot = 0;
+	public Item[] inventory = new Item[5];
+	public int currentSlot = 0;
 	private Texture2D inventorySprite;
 	private Vector2 inventoryPosition;
 	private Vector2[] inventorySlots = new Vector2[4];
@@ -68,7 +68,7 @@ public class Player
 		
 	    if (inventory[currentSlot] != null)
 	    { 
-		    inventory[currentSlot].Update(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
+		    inventory[currentSlot].Update(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f), this);
 	    }
 		
 	    // playerDamage(1);
@@ -232,6 +232,13 @@ public class Player
 			inventorySprites[slot] = item.getTexture();
 		    inventory[slot] = item;
 		    item.pickedUpItem();
+		    if (currentSlot == 0)
+		    {
+			    if (inventory[currentSlot] != null)
+			    {
+				    inventory[currentSlot].setPosition(playerPosition + new Vector2(playerTexture.Width/2f, playerTexture.Height/2f));
+			    }
+		    }
 	    }
     }
 

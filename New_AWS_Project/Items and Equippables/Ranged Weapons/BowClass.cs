@@ -12,9 +12,9 @@ public class Bow : Item{
         base.ItemSprite = Globals.Content.Load<Texture2D>("Bow");
     }
 
-    public override void Use()
+    public override void Use(Player player)
     {
-        if (cooldownLeft > 0) return;
+        if (cooldownLeft > 0 && player.inventory[player.currentSlot].Name == "Bow") return;
         
         cooldownLeft = cooldown;
         int damage = 5;
