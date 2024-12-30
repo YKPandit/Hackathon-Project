@@ -12,7 +12,7 @@ public class GameManager{
         item = new Item(new Vector2(200.0f,100.0f), "Fist", "Melee", "Common");
         sword = new Sword(new Vector2(400.0f,100.0f), "Sword", "Melee", "Common");
         bow = new Bow(new Vector2(300.0f, 100.0f), "Bow", "Ranged", "Common");
-        // EnemyManager.AddEnemy("enemy", new Vector2(200.0f, 100.0f), 2, 5, 10, 60);
+        EnemyManager.AddEnemy("enemy", new Vector2(200.0f, 100.0f), 2, 5, 10, 60);
     }
 
     public void Update(){
