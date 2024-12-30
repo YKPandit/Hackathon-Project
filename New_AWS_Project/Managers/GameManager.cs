@@ -6,18 +6,19 @@ public class GameManager{
     private Item item;
     private Sword sword;
     private Bow bow;
-    private Enemy enemy;
 
     public GameManager(){
         player = new Player(new Vector2(100.0f,200.0f));
         item = new Item(new Vector2(200.0f,100.0f), "Fist", "Melee", "Common");
         sword = new Sword(new Vector2(400.0f,100.0f), "Sword", "Melee", "Common");
         bow = new Bow(new Vector2(300.0f, 100.0f), "Bow", "Ranged", "Common");
-        enemy = new Enemy(new Vector2(200.0f, 100.0f));
+        // EnemyManager.AddEnemy("enemy", new Vector2(200.0f, 100.0f), 2, 5, 10, 60);
     }
 
     public void Update(){
         InputManager.Update();
+
+        // FIX, MAKE IT NOT DOGSHIT
         if (player.PositionRectangle.Intersects(item.ItemPositionRectangle) && !item.pickedUp)
         {
 	        player.pickUp(item);
@@ -33,25 +34,10 @@ public class GameManager{
 	        player.pickUp(bow);
         }
         
-        Vector2 playerPos = player.getPosition();
-        if (!enemy.dead && Vector2.Distance(playerPos, enemy.getPosition()) <= 100)
-        {
-            enemy.move(playerPos);
-            if (Vector2.Distance(playerPos, enemy.getPosition()) <= 25 && enemy.cooldown >= 60)
-            {
-                player.playerDamage(enemy.dmg);
-                enemy.cooldown = 0;
-            }
-            else
-            {
-                enemy.cooldown++;
-            }
-        }
-        
         
         player.Update();
-        PlayerProjectileManager.Update(enemy);
-        enemy.Update();
+        PlayerProjectileManager.Update(EnemyManager._enemies);
+        EnemyManager.Update(player);
     }
 
     public void Draw(){
@@ -60,7 +46,6 @@ public class GameManager{
         sword.Draw();
         bow.Draw();
         PlayerProjectileManager.Draw();
-        enemy.Draw();
+        EnemyManager.Draw();
     }
-
 }

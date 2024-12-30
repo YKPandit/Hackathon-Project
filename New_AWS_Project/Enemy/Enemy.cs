@@ -1,60 +1,47 @@
-﻿namespace New_AWS_Project;
+﻿// Parent class for all enemies
+
+namespace New_AWS_Project;
 
 public class Enemy
 {
-    private int health;
+    public int health;
     public int dmg;
-    private Texture2D sprite;
-    private Vector2 position;
-    private int moveSpeed = 2;
-    public int cooldown = 60;
-    public bool dead = false;
+    public Texture2D enemySprite;
+    public Vector2 position;
+    public int moveSpeed;
+    protected float attackCooldown;
+    protected float attackTimer = 0f;
 
-    
+    public Enemy(Vector2 pos, int health, int dmg, string sprite, int speed, float cooldown)
+    {
+        position = pos;
+        this.health = health;
+        this.dmg = dmg;
+        moveSpeed = speed;
+        attackCooldown = cooldown;
+        LoadContent(sprite);
+    }
+
     public Rectangle PositionRectangle
     {
         get
         {
-            return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+            return new Rectangle((int)position.X, (int)position.Y, enemySprite.Width, enemySprite.Height);
         }
-    }
-
-    public Enemy(Vector2 pos)
-    {
-        position = pos;
-        health = 5;
-        dmg = 10;
-        LoadContent();
     }
     
     
-    public void LoadContent()
+    public virtual void LoadContent(string sprite)
     {
-        sprite = Globals.Content.Load<Texture2D>("enemy");
+        enemySprite = Globals.Content.Load<Texture2D>(sprite);
     }
 
-    public void Update()
+    public virtual void Draw()
     {
-        if (health <= 0)
-        {
-            dead = true;
-        }
+        Globals._spriteBatch.Draw(enemySprite, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
     }
 
-    public void Draw()
-    {
-        if (!dead)
-        {
-            Globals._spriteBatch.Draw(sprite, position, null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
-        }
-    }
-
-    public Vector2 getPosition()
-    {
-        return position;
-    }
-
-    public void move(Vector2 playerPos)
+    public virtual void move(Vector2 playerPos)
     {
         position.X += moveSpeed*((playerPos.X - position.X)/60);
         position.Y += moveSpeed*((playerPos.Y - position.Y)/60);
@@ -63,5 +50,27 @@ public class Enemy
     public void enemyDamage(int damage)
     {
         health -= damage;
+    }
+
+    public virtual void Attack(Player player)
+    {
+        attackTimer = attackCooldown;
+        player.playerDamage(dmg);
+
+    }
+
+    public void Update(Player player)
+    {
+        move(player.getPosition());
+
+        if (attackTimer > 0)
+        {
+            attackTimer -= Globals.totalSeconds;
+        }
+
+        if (attackTimer <= 0 && PositionRectangle.Intersects(player.PositionRectangle))
+        {
+            Attack(player);
+        }
     }
 }

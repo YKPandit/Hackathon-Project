@@ -7,7 +7,7 @@ public static class InputManager{
     public static KeyboardState _currentKeyboardState;
     public static MouseState _previousMouseState;
     public static KeyboardState _previousKeyboardState;
-    public static Vector2 MousePosition => Vector2.Transform(Mouse.GetState().Position.ToVector2(), Matrix.Invert(Globals._screenScaleMatrix));
+    public static Vector2 MousePosition;
     public static Vector2 Direction;
     public static bool LeftClick;
     public static bool RightClick;
@@ -18,7 +18,9 @@ public static class InputManager{
         _previousKeyboardState = _currentKeyboardState;
         
         _currentMouseState = Mouse.GetState();
+        MousePosition = Vector2.Transform(_currentMouseState.Position.ToVector2(), Matrix.Invert(Globals._screenScaleMatrix));
         _currentKeyboardState = Keyboard.GetState();
+
 
         LeftDown = _currentMouseState.LeftButton == ButtonState.Pressed;
         LeftClick = LeftDown && _previousMouseState.LeftButton == ButtonState.Released;

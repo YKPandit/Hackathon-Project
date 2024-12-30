@@ -15,6 +15,7 @@ public class Item
     public string Rarity { get; set; }
     public float opacity = 1.0f;
     public bool pickedUp = false;
+    protected int damage = 1;
     protected float cooldown;
     protected float cooldownLeft = 0;
 
@@ -22,7 +23,7 @@ public class Item
 
     public Item(Vector2 position, string name, string type, string rarity)
     {
-        this.ItemPosition = position;
+        ItemPosition = position;
         LoadContent();
         Name = name;
         Type = type;
@@ -84,7 +85,7 @@ public class Item
         );
     }
 
-    public virtual void Use(Player player)
+    public virtual void Use()
     {
     }
 
@@ -105,31 +106,34 @@ public class Item
         opacity = 0.0f;
     }
 
-    public void mousePosition(Vector2 mousePosition){
-        Vector2 dPos = ItemPosition - mousePosition;
+    public void mousePosition(){
+        Vector2 dPos = ItemPosition - InputManager.MousePosition;
         rotation = (float)Math.Atan2(dPos.Y, dPos.X);
         
-        if(ItemPosition.X + ItemSprite.Width/2 < mousePosition.X)
+        if(ItemPosition.X + ItemSprite.Width/2 < InputManager.MousePosition.X)
         {
             spriteEffect = SpriteEffects.None;
         }
-        else if(ItemPosition.X + ItemSprite.Width/2 > mousePosition.X)
+        else if(ItemPosition.X + ItemSprite.Width/2 > InputManager.MousePosition.X)
         {
             spriteEffect = SpriteEffects.FlipVertically;
         }
     }
 
-    public void Update(Vector2 pos, Player player){
-		ItemPosition = pos;
-        ItemOrigin = new Vector2(ItemSprite.Width, ItemSprite.Height / 2f);
-
+    public void reduceCooldown(){
         if (cooldownLeft > 0)
         {
             cooldownLeft -= Globals.totalSeconds;
         }
+    }
+
+    public void Update(Vector2 pos){
+		ItemPosition = pos;
+        ItemOrigin = new Vector2(ItemSprite.Width, ItemSprite.Height / 2f);
+        mousePosition();
         
         if (InputManager.LeftDown){
-            Use(player);
+            Use();
         }
 	}
 }

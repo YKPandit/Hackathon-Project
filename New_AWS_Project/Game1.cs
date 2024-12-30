@@ -6,10 +6,6 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager GameManager;
 
-    
-    //resolution we render at
-    private int _virtualWidth = 640;
-    private int _virtualHeight = 360;
     private Viewport _viewport;
 
     // Flags
@@ -64,6 +60,7 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
+
         Globals.Update(gameTime);
         GameManager.Update();
         
@@ -95,28 +92,22 @@ public class Game1 : Game
         if (screenWidth/ Globals._resolutionWidth > screenHeight / Globals._resolutionHeight)
         {
             float aspect = screenHeight / Globals._resolutionHeight;
-            _virtualWidth = (int)(aspect * Globals._resolutionWidth);
-            _virtualHeight = (int)screenHeight;
+            Globals.screenWidth = (int)(aspect * Globals._resolutionWidth);
+            Globals.screenHeight = (int)screenHeight;
         }
         else {
             float aspect = screenWidth / Globals._resolutionWidth;
-            _virtualWidth = (int)screenWidth;
-            _virtualHeight = (int)(aspect * Globals._resolutionHeight);
+            Globals.screenWidth = (int)screenWidth;
+            Globals.screenHeight = (int)(aspect * Globals._resolutionHeight);
         }
 
-        Globals._screenScaleMatrix = Matrix.CreateScale(_virtualWidth / (float)Globals._resolutionWidth, _virtualHeight / (float)Globals._resolutionHeight, 1.0f);
+        Globals._screenScaleMatrix = Matrix.CreateScale(Globals.screenWidth / (float)Globals._resolutionWidth, Globals.screenHeight / (float)Globals._resolutionHeight, 1.0f);
 
         _viewport = new Viewport{
-            X = (int)(screenWidth / 2 - _virtualWidth / 2),
-            Y = (int)(screenHeight / 2 - _virtualHeight / 2),
-            Width = _virtualWidth,
-            Height = _virtualHeight,
-            MinDepth = 0,
-            MaxDepth = 1
+            X = (int)(screenWidth / 2 - Globals.screenWidth / 2),
+            Y = (int)(screenHeight / 2 - Globals.screenHeight / 2),
+            Width = Globals.screenWidth,
+            Height = Globals.screenHeight,
         };
-
-		Globals.screenWidth = _virtualWidth;
-		Globals.screenHeight = _virtualHeight;
-        
     }
 }

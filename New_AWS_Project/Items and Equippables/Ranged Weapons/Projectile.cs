@@ -26,7 +26,7 @@ public class Projectile
         Damage = damage;
     }
 
-        public virtual Rectangle ItemPositionRectangle // Create hitbox for item
+    public virtual Rectangle ItemPositionRectangle
     {
         get
         {
@@ -58,7 +58,6 @@ public class Projectile
 
     public void Draw()
     {
-        
         Globals._spriteBatch.Draw(
             Texture,
             Position,
@@ -72,11 +71,14 @@ public class Projectile
         );
     }
 
+    public void Destroy()
+    {
+        Lifespan = 0;
+    }
 
-    public void Update(Enemy enemy)
+    public void Update()
     {
         Position += Direction * Speed * Globals.totalSeconds;
         Lifespan -= Globals.totalSeconds;
-
     }
 }

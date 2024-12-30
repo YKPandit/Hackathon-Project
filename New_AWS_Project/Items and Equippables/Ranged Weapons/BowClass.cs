@@ -5,6 +5,7 @@ public class Bow : Item{
     : base(position, name, type, rarity){
         LoadContent();
         cooldown = 1.0f;
+        damage = 5;
     }
 
     public override void LoadContent(){ 
@@ -12,12 +13,11 @@ public class Bow : Item{
         base.ItemSprite = Globals.Content.Load<Texture2D>("Bow");
     }
 
-    public override void Use(Player player)
+    public override void Use()
     {
-        if (cooldownLeft > 0 && player.inventory[player.currentSlot].Name == "Bow") return;
+        if (cooldownLeft > 0) return;
         
         cooldownLeft = cooldown;
-        int damage = 5;
         // Create a new projectile
         PlayerProjectileManager.AddProjectile("Arrow", new Vector2(ItemPosition.X, ItemPosition.Y), 600, rotation, 2, damage);
 
