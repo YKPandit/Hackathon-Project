@@ -9,6 +9,7 @@ public static class Globals
     public static float totalSeconds { get; set; }
     public static SpriteBatch _spriteBatch { get; set; }
     public static Matrix _screenScaleMatrix { get; set; }
+    public static GraphicsDeviceManager _graphics;
 
     //desired Game resolution
     public static int _resolutionWidth = 640;

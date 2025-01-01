@@ -13,13 +13,16 @@ public class Bow : Item{
         base.ItemSprite = Globals.Content.Load<Texture2D>("Bow");
     }
 
-    public override void Use()
+    public override void Use(Player player)
     {
         if (cooldownLeft > 0) return;
         
         cooldownLeft = cooldown;
+        player.inventory.attacking = true;
+
         // Create a new projectile
         PlayerProjectileManager.AddProjectile("Arrow", new Vector2(ItemPosition.X, ItemPosition.Y), 600, rotation, 2, damage);
+        player.inventory.attacking = false;
 
     }
 }

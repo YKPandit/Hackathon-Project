@@ -1,4 +1,6 @@
-﻿namespace New_AWS_Project;
+﻿
+
+namespace New_AWS_Project;
 
 public class Player
 {
@@ -6,7 +8,7 @@ public class Player
     private Vector2 playerPosition;
 	private int moveSpeed = 200;
 	private SpriteEffects spriteEffect = SpriteEffects.None;
-	private Inventory inventory = new Inventory();
+	public Inventory inventory = new Inventory();
 
 	// Health
 	private int playerHealth = 100;
@@ -43,7 +45,7 @@ public class Player
     public void Update()
     {
     	playerMovement();
-		inventory.Update(playerPosition + new Vector2(playerTexture.Width/2, playerTexture.Height/2));
+		inventory.Update(this);
     }
 
 	public void Draw()
@@ -58,7 +60,11 @@ public class Player
 	{
 		return playerPosition;
 	}
-    
+
+	public Vector2 getCenter()
+	{
+		return new Vector2(playerPosition.X + playerTexture.Width/2, playerPosition.Y + playerTexture.Height/2);
+	}
 	// Player Movement
 	private void playerMovement()
 	{
@@ -91,25 +97,21 @@ public class Player
 
 	public void pickUp(Item item)
     {
-	    if (!inventory.inventoryFull && Keyboard.GetState().IsKeyDown(Keys.Q))
-	    {
-			int slot = 0;
-			while (inventory.inventory[slot] != null)
+		int slot = 0;
+		while (inventory.inventory[slot] != null)
+		{
+			slot++;
+			if (slot == 4)
 			{
-				slot++;
-				if (slot == 4)
-				{
-					inventory.inventoryFull = true;
-					break;
-				}
+				inventory.inventoryFull = true;
+				break;
 			}
-			inventory.inventorySprites[slot] = item.getTexture();
-		    inventory.inventory[slot] = item;
-		    item.pickedUpItem();
-			if (slot == inventory.currentSlot){
-				inventory.inventory[slot].setPosition(playerPosition + new Vector2(playerTexture.Width/2, playerTexture.Height/2));
-			}
+		}
+		inventory.inventory[slot] = item;
+		item.pickedUpItem();
+		if (slot == inventory.currentSlot){
+			inventory.inventory[slot].setPosition(playerPosition + new Vector2(playerTexture.Width/2, playerTexture.Height/2));
+		}
 
-	    }
     }
 }

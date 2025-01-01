@@ -2,7 +2,6 @@
 
 public class Game1 : Game
 {
-    private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameManager GameManager;
 
@@ -13,10 +12,10 @@ public class Game1 : Game
 
     public Game1()
     {
-        _graphics = new GraphicsDeviceManager(this);
-        _graphics.PreferredBackBufferWidth = Globals._resolutionWidth;
-		_graphics.PreferredBackBufferHeight = Globals._resolutionHeight;
-		_graphics.ApplyChanges();
+        Globals._graphics = new GraphicsDeviceManager(this);
+        Globals._graphics.PreferredBackBufferWidth = Globals._resolutionWidth;
+		Globals._graphics.PreferredBackBufferHeight = Globals._resolutionHeight;
+		Globals._graphics.ApplyChanges();
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
 
