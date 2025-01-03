@@ -143,14 +143,6 @@ public class Item
         ItemOrigin = new Vector2(ItemSprite.Width, ItemSprite.Height / 2f);
         mousePosition();
         UpdateItemPositionRectangle();
-
-        foreach (Enemy enemy in EnemyManager._enemies)
-        {
-            if (ItemPositionRectangle.Intersects(enemy.PositionRectangle))
-            {
-                Console.WriteLine("Enemy hit");
-            }
-        }
         
         if (InputManager.LeftDown){
             Use(player);

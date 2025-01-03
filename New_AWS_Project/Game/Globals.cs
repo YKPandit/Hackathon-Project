@@ -8,16 +8,14 @@ public static class Globals
     public static ContentManager Content { get; set; }
     public static float totalSeconds { get; set; }
     public static SpriteBatch _spriteBatch { get; set; }
-    public static Matrix _screenScaleMatrix { get; set; }
     public static GraphicsDeviceManager _graphics;
+    public static Camera _camera { get; set; }
 
     //desired Game resolution
-    public static int _resolutionWidth = 640;
-    public static int _resolutionHeight = 360;
+    public static Vector2 _resolution = new Vector2(640, 360);
 
     // actual render resolution
-    public static int screenWidth { get; set; }
-    public static int screenHeight { get; set; }
+    public static Vector2 _screenSize { get; set; }
     
     public static void Update(GameTime gameTime)
     {

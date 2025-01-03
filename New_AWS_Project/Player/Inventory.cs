@@ -99,7 +99,7 @@ public class Inventory
 
 		if(inventoryPosition.X == 0)
 		{
-			inventoryPosition = new Vector2(Globals.screenWidth - 75, Globals.screenHeight - 29);
+			inventoryPosition = new Vector2(Globals._screenSize.X - 75, Globals._screenSize.Y - 29);
 		}
 		Vector2 playerCenter = player.getCenter();
         inventorySelect(playerCenter);

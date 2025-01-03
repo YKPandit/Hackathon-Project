@@ -18,7 +18,7 @@ public static class InputManager{
         _previousKeyboardState = _currentKeyboardState;
         
         _currentMouseState = Mouse.GetState();
-        MousePosition = Vector2.Transform(_currentMouseState.Position.ToVector2(), Matrix.Invert(Globals._screenScaleMatrix));
+        MousePosition = Vector2.Transform(_currentMouseState.Position.ToVector2(), Matrix.Invert(Globals._camera.GetViewMatrix()));
         _currentKeyboardState = Keyboard.GetState();
 
 

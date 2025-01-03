@@ -73,8 +73,8 @@ public class Player
 		{
 			var dir = Vector2.Normalize(InputManager.Direction);
 
-			playerPosition = new(MathHelper.Clamp (playerPosition.X + (dir.X * moveSpeed * Globals.totalSeconds), 0, Globals._resolutionWidth - playerTexture.Width),
-								MathHelper.Clamp (playerPosition.Y + (dir.Y * moveSpeed * Globals.totalSeconds), 0, Globals._resolutionHeight - playerTexture.Height));
+			playerPosition = new(MathHelper.Clamp (playerPosition.X + (dir.X * moveSpeed * Globals.totalSeconds), 0, Globals._resolution.X - playerTexture.Width),
+								MathHelper.Clamp (playerPosition.Y + (dir.Y * moveSpeed * Globals.totalSeconds), 0, Globals._resolution.Y - playerTexture.Height));
 		}
 
 
