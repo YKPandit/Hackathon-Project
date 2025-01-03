@@ -116,18 +116,17 @@ public class Item
     {
         opacity = 0.0f;
     }
-
     public void mousePosition(){
         Vector2 dPos = ItemPosition - InputManager.MousePosition;
         rotation = (float)Math.Atan2(dPos.Y, dPos.X);
         
-        if(ItemPosition.X + ItemSprite.Width/2 < InputManager.MousePosition.X)
-        {
-            spriteEffect = SpriteEffects.None;
-        }
-        else if(ItemPosition.X + ItemSprite.Width/2 > InputManager.MousePosition.X)
+        if(rotation + Math.PI/2 > 0 && rotation + Math.PI/2 < Math.PI)
         {
             spriteEffect = SpriteEffects.FlipVertically;
+        }
+        else
+        {
+            spriteEffect = SpriteEffects.None;
         }
     }
 
