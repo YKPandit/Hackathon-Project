@@ -9,7 +9,9 @@ public class Player
 	private int moveSpeed = 200;
 	private SpriteEffects spriteEffect = SpriteEffects.None;
 	public Inventory inventory = new Inventory();
-
+	bool attacking = false;
+	
+	// To be changed and moved to sepetate class
 	// Health
 	private int playerHealth = 100;
 	private float healthScale = 0.75f;

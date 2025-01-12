@@ -84,33 +84,4 @@ public class Game1 : Game
         // TODO: Add your drawing code here
         base.Draw(gameTime);
     }
-    
-    // private void UpdateScreenScaleMatrix()
-    // {
-    //     // Size of actual screen
-    //     float screenWidth = GraphicsDevice.PresentationParameters.BackBufferWidth;
-    //     float screenHeight = GraphicsDevice.PresentationParameters.BackBufferHeight;
-
-    //     // Calculate virtual resolution based on current screen width and height
-    //     if (screenWidth/ Globals._resolutionWidth > screenHeight / Globals._resolutionHeight)
-    //     {
-    //         float aspect = screenHeight / Globals._resolutionHeight;
-    //         Globals.screenWidth = (int)(aspect * Globals._resolutionWidth);
-    //         Globals.screenHeight = (int)screenHeight;
-    //     }
-    //     else {
-    //         float aspect = screenWidth / Globals._resolutionWidth;
-    //         Globals.screenWidth = (int)screenWidth;
-    //         Globals.screenHeight = (int)(aspect * Globals._resolutionHeight);
-    //     }
-
-    //     Globals._screenScaleMatrix = Matrix.CreateScale(Globals.screenWidth / (float)Globals._resolutionWidth, Globals.screenHeight / (float)Globals._resolutionHeight, 1.0f);
-
-    //     _viewport = new Viewport{
-    //         X = (int)(screenWidth / 2 - Globals.screenWidth / 2),
-    //         Y = (int)(screenHeight / 2 - Globals.screenHeight / 2),
-    //         Width = Globals.screenWidth,
-    //         Height = Globals.screenHeight,
-    //     };
-    // }
 }
